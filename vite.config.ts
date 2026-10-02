@@ -8,7 +8,7 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
   vite: {
-    base: "/breizh-beyond/",
+    base: process.env.GITHUB_ACTIONS ? "/breizh-beyond/" : "/",
   },
   tanstackStart: {
     // GitHub Pages is a static host, so build the app as a static site.
