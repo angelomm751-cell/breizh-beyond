@@ -11,8 +11,11 @@ export default defineConfig({
     base: "/breizh-beyond/",
   },
   tanstackStart: {
-    // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
-    // nitro/vite builds from this
-    server: { entry: "server" },
+    // GitHub Pages is a static host, so build the app as a static site.
+    // Keep the existing custom server entry unchanged.
+    server: {
+      entry: "server",
+      preset: "static",
+    },
   },
 });
