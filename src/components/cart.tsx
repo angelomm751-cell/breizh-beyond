@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo, useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
-import { Minus, Plus, ShoppingBag, X } from "lucide-react";
+import { ArrowRight, Minus, Plus, ShoppingBag, X } from "lucide-react";
 import { Button } from "./button";
 import { formatPrice, products, type Product } from "@/lib/menu";
 
