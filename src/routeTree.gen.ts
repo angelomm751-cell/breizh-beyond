@@ -10,33 +10,74 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as GalerieRouteImport } from './routes/galerie'
+import { Route as LaCarteRouteImport } from './routes/la-carte'
+import { Route as NotreHistoireRouteImport } from './routes/notre-histoire'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalerieRoute = GalerieRouteImport.update({
+  id: '/galerie',
+  path: '/galerie',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LaCarteRoute = LaCarteRouteImport.update({
+  id: '/la-carte',
+  path: '/la-carte',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotreHistoireRoute = NotreHistoireRouteImport.update({
+  id: '/notre-histoire',
+  path: '/notre-histoire',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
+  '/galerie': typeof GalerieRoute
+  '/la-carte': typeof LaCarteRoute
+  '/notre-histoire': typeof NotreHistoireRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
+  '/galerie': typeof GalerieRoute
+  '/la-carte': typeof LaCarteRoute
+  '/notre-histoire': typeof NotreHistoireRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
+  '/galerie': typeof GalerieRoute
+  '/la-carte': typeof LaCarteRoute
+  '/notre-histoire': typeof NotreHistoireRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/contact' | '/galerie' | '/la-carte' | '/notre-histoire'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/contact' | '/galerie' | '/la-carte' | '/notre-histoire'
+  id:
+    '__root__' | '/' | '/contact' | '/galerie' | '/la-carte' | '/notre-histoire'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ContactRoute: typeof ContactRoute
+  GalerieRoute: typeof GalerieRoute
+  LaCarteRoute: typeof LaCarteRoute
+  NotreHistoireRoute: typeof NotreHistoireRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +89,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/galerie': {
+      id: '/galerie'
+      path: '/galerie'
+      fullPath: '/galerie'
+      preLoaderRoute: typeof GalerieRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/la-carte': {
+      id: '/la-carte'
+      path: '/la-carte'
+      fullPath: '/la-carte'
+      preLoaderRoute: typeof LaCarteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notre-histoire': {
+      id: '/notre-histoire'
+      path: '/notre-histoire'
+      fullPath: '/notre-histoire'
+      preLoaderRoute: typeof NotreHistoireRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ContactRoute: ContactRoute,
+  GalerieRoute: GalerieRoute,
+  LaCarteRoute: LaCarteRoute,
+  NotreHistoireRoute: NotreHistoireRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
