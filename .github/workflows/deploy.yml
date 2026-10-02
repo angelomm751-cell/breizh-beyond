@@ -43,8 +43,8 @@ jobs:
           CSS="$(find .output/public/assets -maxdepth 1 -type f -name 'styles-*.css' | head -n 1)"
           test -n "$ENTRY"
           test -n "$CSS"
-          ENTRY="${ENTRY#./.output/public/}"
-          CSS="${CSS#./.output/public/}"
+          ENTRY="${ENTRY#.output/public/}"
+          CSS="${CSS#.output/public/}"
           cat > .output/public/index.html <<EOF
           <!doctype html>
           <html lang="fr">
