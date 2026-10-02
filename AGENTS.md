@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep menu products in one shared data module so the editorial menu, cart, and checkout cannot drift.
+- Keep commerce session-only until a real ordering backend and payment provider are configured.

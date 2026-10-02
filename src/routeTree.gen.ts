@@ -10,33 +10,128 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as CommanderRouteImport } from './routes/commander'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as GalerieRouteImport } from './routes/galerie'
+import { Route as LaCarteRouteImport } from './routes/la-carte'
+import { Route as MerciRouteImport } from './routes/merci'
+import { Route as NotreHistoireRouteImport } from './routes/notre-histoire'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommanderRoute = CommanderRouteImport.update({
+  id: '/commander',
+  path: '/commander',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalerieRoute = GalerieRouteImport.update({
+  id: '/galerie',
+  path: '/galerie',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LaCarteRoute = LaCarteRouteImport.update({
+  id: '/la-carte',
+  path: '/la-carte',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MerciRoute = MerciRouteImport.update({
+  id: '/merci',
+  path: '/merci',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotreHistoireRoute = NotreHistoireRouteImport.update({
+  id: '/notre-histoire',
+  path: '/notre-histoire',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/checkout': typeof CheckoutRoute
+  '/commander': typeof CommanderRoute
+  '/contact': typeof ContactRoute
+  '/galerie': typeof GalerieRoute
+  '/la-carte': typeof LaCarteRoute
+  '/merci': typeof MerciRoute
+  '/notre-histoire': typeof NotreHistoireRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/checkout': typeof CheckoutRoute
+  '/commander': typeof CommanderRoute
+  '/contact': typeof ContactRoute
+  '/galerie': typeof GalerieRoute
+  '/la-carte': typeof LaCarteRoute
+  '/merci': typeof MerciRoute
+  '/notre-histoire': typeof NotreHistoireRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/checkout': typeof CheckoutRoute
+  '/commander': typeof CommanderRoute
+  '/contact': typeof ContactRoute
+  '/galerie': typeof GalerieRoute
+  '/la-carte': typeof LaCarteRoute
+  '/merci': typeof MerciRoute
+  '/notre-histoire': typeof NotreHistoireRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/checkout'
+    | '/commander'
+    | '/contact'
+    | '/galerie'
+    | '/la-carte'
+    | '/merci'
+    | '/notre-histoire'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/checkout'
+    | '/commander'
+    | '/contact'
+    | '/galerie'
+    | '/la-carte'
+    | '/merci'
+    | '/notre-histoire'
+  id:
+    | '__root__'
+    | '/'
+    | '/checkout'
+    | '/commander'
+    | '/contact'
+    | '/galerie'
+    | '/la-carte'
+    | '/merci'
+    | '/notre-histoire'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CheckoutRoute: typeof CheckoutRoute
+  CommanderRoute: typeof CommanderRoute
+  ContactRoute: typeof ContactRoute
+  GalerieRoute: typeof GalerieRoute
+  LaCarteRoute: typeof LaCarteRoute
+  MerciRoute: typeof MerciRoute
+  NotreHistoireRoute: typeof NotreHistoireRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +143,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/commander': {
+      id: '/commander'
+      path: '/commander'
+      fullPath: '/commander'
+      preLoaderRoute: typeof CommanderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/galerie': {
+      id: '/galerie'
+      path: '/galerie'
+      fullPath: '/galerie'
+      preLoaderRoute: typeof GalerieRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/la-carte': {
+      id: '/la-carte'
+      path: '/la-carte'
+      fullPath: '/la-carte'
+      preLoaderRoute: typeof LaCarteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/merci': {
+      id: '/merci'
+      path: '/merci'
+      fullPath: '/merci'
+      preLoaderRoute: typeof MerciRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notre-histoire': {
+      id: '/notre-histoire'
+      path: '/notre-histoire'
+      fullPath: '/notre-histoire'
+      preLoaderRoute: typeof NotreHistoireRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CheckoutRoute: CheckoutRoute,
+  CommanderRoute: CommanderRoute,
+  ContactRoute: ContactRoute,
+  GalerieRoute: GalerieRoute,
+  LaCarteRoute: LaCarteRoute,
+  MerciRoute: MerciRoute,
+  NotreHistoireRoute: NotreHistoireRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
