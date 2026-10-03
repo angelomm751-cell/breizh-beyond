@@ -11,11 +11,15 @@ export default defineConfig({
     base: process.env.GITHUB_ACTIONS ? "/breizh-beyond/" : "/",
   },
   tanstackStart: {
-    // GitHub Pages is a static host, so build the app as a static site.
+    // GitHub Pages is a static host, so build and prerender the app as a static site.
     // Keep the existing custom server entry unchanged.
     server: {
       entry: "server",
       preset: "static",
+    },
+    prerender: {
+      enabled: true,
+      crawlLinks: true,
     },
   },
 });
