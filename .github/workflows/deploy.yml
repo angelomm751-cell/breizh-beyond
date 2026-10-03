@@ -35,34 +35,12 @@ jobs:
       - name: Build
         run: bun run build
 
-      - name: Create GitHub Pages entry point
+      - name: Prepare GitHub Pages fallback
         shell: bash
         run: |
           set -e
-          ENTRY="$(find .output/public/assets -maxdepth 1 -type f -name 'index-*.js' | head -n 1)"
-          CSS="$(find .output/public/assets -maxdepth 1 -type f -name 'styles-*.css' | head -n 1)"
-          test -n "$ENTRY"
-          test -n "$CSS"
-          ENTRY="${ENTRY#.output/public/}"
-          CSS="${CSS#.output/public/}"
-          cat > .output/public/index.html <<EOF
-          <!doctype html>
-          <html lang="fr">
-            <head>
-              <meta charset="UTF-8">
-              <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <meta name="theme-color" content="#0d1b2a">
-              <title>BREIZH FOOD</title>
-              <link rel="icon" href="./favicon.svg">
-              <link rel="stylesheet" href="./$CSS">
-            </head>
-            <body>
-              <script type="module" src="./$ENTRY"></script>
-            </body>
-          </html>
-          EOF
+          test -f .output/public/index.html
           cp .output/public/index.html .output/public/404.html
-
       - name: Setup Pages
         uses: actions/configure-pages@v6
 
