@@ -29,7 +29,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
     <CartProvider>
       <header className={scrolled ? "site-header is-scrolled" : "site-header"}>
         <Link to="/" className="wordmark" aria-label="BREIZH FOOD — Início"><span>BREIZH</span><small>Food</small></Link>
-        <nav className="desktop-nav" aria-label="Navigation principale">
+        <nav className="desktop-nav" aria-label="Navegação principal">
           {links.map((link) => <Link key={link.to} to={link.to} activeProps={{ className: "is-active" }}>{link.label}</Link>)}
         </nav>
         <div className="header-actions">
@@ -42,7 +42,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
       <div className={menuOpen ? "mobile-menu is-open" : "mobile-menu"} aria-hidden={!menuOpen}>
         <div className="mobile-menu-head"><span className="wordmark"><span>BREIZH</span><small>Food</small></span><button className="icon-button icon-button--light" onClick={() => setMenuOpen(false)} aria-label="Fechar menu"><X /></button></div>
         <div className="mobile-menu-rule" />
-        <nav aria-label="Navigation mobile">
+        <nav aria-label="Navegação móvel">
           {[...links.slice(0, 4), { to: "/commander" as const, label: "Encomendar" }, links[4]].map((link, index) => (
             <Link key={link.to} to={link.to} onClick={() => setMenuOpen(false)} style={{ "--i": index } as React.CSSProperties}><span>0{index + 1}</span>{link.label}</Link>
           ))}
