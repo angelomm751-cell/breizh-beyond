@@ -65,6 +65,11 @@ function Index() {
         <div className="product-grid">{products.slice(0, 3).map((product, index) => <ProductCard product={product} index={index} key={product.id} />)}</div>
       </section>
 
+      <section className="menu-preview boutique-preview">
+        <Reveal className="section-heading"><span className="eyebrow">03 · Boutique</span><h2>Nos coups de cœur,<br /><em>à déguster au Portugal.</em></h2><p>Crêpes, mini pancakes e algodão doce — une petite touche de Bretagne, feita na hora.</p><Link to="/commander" className="text-link">Ver produtos e encomendar <ArrowRight size={16} /></Link></Reveal>
+        <div className="product-grid">{products.slice(6, 8).map((product, index) => <ProductCard product={product} index={index} key={product.id} />)}</div>
+      </section>
+
       <section className="wood-section">
         <img src={maisonImage} alt="Intérieur chaleureux de la maison BREIZH FOOD" width={1536} height={1024} loading="lazy" />
         <div className="wood-shade" />
