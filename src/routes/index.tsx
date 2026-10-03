@@ -37,7 +37,7 @@ function Index() {
           <Link to="/la-carte" className="text-link">Descobrir a ementa <ArrowRight size={16} /></Link>
         </div>
         <div className="hero-image"><img src={heroImage} alt="Galette artesanal BREIZH FOOD" width={1536} height={1024} fetchPriority="high" /></div>
-        <div className="hero-side"><span>De Bretagne</span><i /><span>À Portugal</span></div>
+        <div className="hero-side"><span>Da Bretanha</span><i /><span>A Portugal</span></div>
         <a href="#maison" className="hero-scroll" aria-label="Descobrir a seguir"><ArrowDown size={17} /> Descer</a>
       </section>
 
@@ -61,12 +61,12 @@ function Index() {
       </section>
 
       <section className="menu-preview">
-        <Reveal className="section-heading"><span className="eyebrow">02 · La carte</span><h2>Clássicos,<br /><em>à nossa maneira.</em></h2><Link to="/la-carte" className="text-link">Ver toda a ementa <ArrowRight size={16} /></Link></Reveal>
+        <Reveal className="section-heading"><span className="eyebrow">02 · A ementa</span><h2>Clássicos,<br /><em>à nossa maneira.</em></h2><Link to="/la-carte" className="text-link">Ver toda a ementa <ArrowRight size={16} /></Link></Reveal>
         <div className="product-grid">{products.slice(0, 3).map((product, index) => <ProductCard product={product} index={index} key={product.id} />)}</div>
       </section>
 
       <section className="menu-preview boutique-preview">
-        <Reveal className="section-heading"><span className="eyebrow">03 · Boutique</span><h2>Os nossos favoritos,<br /><em>para saborear em Portugal.</em></h2><p>Crepes, mini pancakes e algodão doce — uma pequena touche de Bretagne, feita na hora.</p><Link to="/commander" className="text-link">Ver produtos e encomendar <ArrowRight size={16} /></Link></Reveal>
+        <Reveal className="section-heading"><span className="eyebrow">03 · Boutique</span><h2>Os nossos favoritos,<br /><em>para saborear em Portugal.</em></h2><p>Crepes, mini pancakes e algodão doce — um pequeno toque da Bretanha, feita na hora.</p><Link to="/commander" className="text-link">Ver produtos e encomendar <ArrowRight size={16} /></Link></Reveal>
         <div className="product-grid">{products.slice(6, 8).map((product, index) => <ProductCard product={product} index={index} key={product.id} />)}</div>
       </section>
 
@@ -84,7 +84,7 @@ function Index() {
 
       <section className="final-cta">
         <div className="final-cta-image"><img src={heroImage} alt="Galette prête à déguster" width={1536} height={1024} loading="lazy" /></div>
-        <Reveal className="final-cta-copy"><span className="eyebrow">Breizh Food chez vous</span><h2>Um pequeno sabor<br />da Bretanha&nbsp;?</h2><p>Os sabores da Bretanha, diretamente em sua casa.</p><Link to="/commander" className="brand-link brand-link--gold">Encomendar para casa <ArrowRight size={16} /></Link></Reveal>
+        <Reveal className="final-cta-copy"><span className="eyebrow">Breizh Food em sua casa</span><h2>Um pequeno sabor<br />da Bretanha&nbsp;?</h2><p>Os sabores da Bretanha, diretamente em sua casa.</p><Link to="/commander" className="brand-link brand-link--gold">Encomendar para casa <ArrowRight size={16} /></Link></Reveal>
       </section>
     </>
   );
