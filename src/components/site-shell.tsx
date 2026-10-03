@@ -54,9 +54,9 @@ export function SiteShell({ children }: { children: ReactNode }) {
       <footer className="site-footer">
         <div className="footer-mark"><span>BREIZH</span><em>FOOD</em><p>Da Bretanha a Portugal</p></div>
         <div className="footer-grid">
-          <div><span className="eyebrow">A casa</span><Link to="/notre-histoire">A nossa história</Link><Link to="/la-carte">A ementa</Link><Link to="/galerie">Galeria</Link></div>
-          <div><span className="eyebrow">Onde estamos</span><p>Adresse à confirmer<br />Portugal</p><Link to="/contact">Contacto & horários</Link></div>
-          <div><span className="eyebrow">À sua mesa</span><Link to="/commander">Encomendar para casa</Link><a href="mailto:bonjour@breizhfood.pt">bonjour@breizhfood.pt</a></div>
+          <div><span className="eyebrow">La maison</span><Link to="/notre-histoire">A nossa história</Link><Link to="/la-carte">A ementa</Link><Link to="/galerie">Galeria</Link></div>
+          <div><span className="eyebrow">Où nous sommes</span><p>Morada à confirmar<br />Portugal</p><Link to="/contact">Contacto & horários</Link></div>
+          <div><span className="eyebrow">À votre table</span><Link to="/commander">Encomendar para casa</Link><a href="mailto:bonjour@breizhfood.pt">bonjour@breizhfood.pt</a></div>
           <a href="https://instagram.com" aria-label="Instagram" className="footer-social"><Instagram /><span>Instagram</span></a>
         </div>
         <div className="footer-bottom"><span>© 2026 BREIZH FOOD</span><span>Informações de demonstração a substituir antes da publicação</span></div>
