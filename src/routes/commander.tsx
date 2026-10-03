@@ -5,7 +5,7 @@ import { useCart } from "@/components/cart";
 import { formatPrice, products } from "@/lib/menu";
 
 export const Route = createFileRoute("/commander")({ head: () => ({ meta: [
-  { title: "Encomendar para Casa — BREIZH FOOD" }, { name: "description", content: "Encomende os sabores da Bretanha diretamente para sua casa." },
+  { title: "Encomendar para Casa — BREIZH FOOD" }, { name: "description", content: "Encomende os sabores da Bretanha diretamente para a sua casa." },
   { property: "og:title", content: "BREIZH FOOD em sua Casa" }, { property: "og:description", content: "Escolha as suas galettes, crepes e outras especialidades artesanais." },
   { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" },
 ] }), component: Commander });
