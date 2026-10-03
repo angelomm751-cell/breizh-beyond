@@ -44,7 +44,7 @@ function Index() {
       <section className="intro-section" id="maison">
         <Reveal className="section-kicker"><span>01</span><span className="eyebrow">La maison</span><i /></Reveal>
         <div className="intro-grid">
-          <Reveal><h2>O sabor do saber-fazer,<br /><em>a elegância para partilhar.</em></h2></Reveal>
+          <Reveal><h2>O sabor do <em>savoir-faire</em>,<br /><em>a elegância para partilhar.</em></h2></Reveal>
           <Reveal className="intro-copy"><p>Reunimos o trigo-sarraceno bretão, a manteiga salgada e o espírito acolhedor das mesas portuguesas. Uma cozinha cuidada, generosa e sem artifícios.</p><Link to="/notre-histoire" className="text-link">Découvrir a nossa história <ArrowRight size={16} /></Link></Reveal>
         </div>
         <div className="story-composition">
@@ -61,30 +61,30 @@ function Index() {
       </section>
 
       <section className="menu-preview">
-        <Reveal className="section-heading"><span className="eyebrow">02 · La carte</span><h2>Clássicos,<br /><em>à nossa maneira.</em></h2><Link to="/la-carte" className="text-link">Ver toda a ementa <ArrowRight size={16} /></Link></Reveal>
+        <Reveal className="section-heading"><span className="eyebrow">02 · La carte</span><h2>Clássicos,<br /><em>à notre manière.</em></h2><Link to="/la-carte" className="text-link">Ver toda a ementa <ArrowRight size={16} /></Link></Reveal>
         <div className="product-grid">{products.slice(0, 3).map((product, index) => <ProductCard product={product} index={index} key={product.id} />)}</div>
       </section>
 
       <section className="menu-preview boutique-preview">
-        <Reveal className="section-heading"><span className="eyebrow">03 · La boutique</span><h2>Os nossos favoritos,<br /><em>para saborear em Portugal.</em></h2><p>Crepes, mini pancakes e algodão doce — une petite touche de Bretagne, feita na hora.</p><Link to="/commander" className="text-link">Ver produtos e encomendar <ArrowRight size={16} /></Link></Reveal>
+        <Reveal className="section-heading"><span className="eyebrow">03 · La boutique</span><h2>Os nossos favoritos,<br /><em>pour savourer em Portugal.</em></h2><p>Crepes, mini pancakes e algodão doce — <em>une petite touche de Bretagne</em>, feita na hora.</p><Link to="/commander" className="text-link">Ver produtos e encomendar <ArrowRight size={16} /></Reveal>
         <div className="product-grid">{products.slice(6, 8).map((product, index) => <ProductCard product={product} index={index} key={product.id} />)}</div>
       </section>
 
       <section className="wood-section">
         <img src={maisonImage} alt="Ambiente acolhedor da BREIZH FOOD" width={1536} height={1024} loading="lazy" />
         <div className="wood-shade" />
-        <Reveal className="wood-copy"><span className="eyebrow">Une maison vivante</span><h2>À francesa.<br /><em>À sua mesa.</em></h2><p>Ingredientes genuínos, luz suave e o prazer simples de um prato feito na hora.</p></Reveal>
+        <Reveal className="wood-copy"><span className="eyebrow">Une maison vivante</span><h2>À francesa.<br /><em>À votre table.</em></h2><p>Ingredientes genuínos, luz suave e o prazer simples de um prato feito na hora.</p></Reveal>
       </section>
 
       <section className="editorial-gallery">
-        <Reveal className="gallery-copy"><span className="eyebrow">04 · Galerie</span><h2>Nos bastidores<br /><em>da Breizh.</em></h2><Link to="/galerie" className="text-link">Ver a galeria <ArrowRight size={16} /></Link></Reveal>
+        <Reveal className="gallery-copy"><span className="eyebrow">04 · Galerie</span><h2>Nos bastidores<br /><em>de la Breizh.</em></h2><Link to="/galerie" className="text-link">Ver a galeria <ArrowRight size={16} /></Link></Reveal>
         <Reveal className="gallery-tile gallery-tile--a"><img src={menuImage} alt="A ementa BREIZH FOOD" width={1536} height={1024} loading="lazy" /></Reveal>
         <Reveal className="gallery-tile gallery-tile--b"><img src={craftImage} alt="Preparação artesanal" width={1024} height={1280} loading="lazy" /></Reveal>
       </section>
 
       <section className="final-cta">
         <div className="final-cta-image"><img src={heroImage} alt="Galette prête à déguster" width={1536} height={1024} loading="lazy" /></div>
-        <Reveal className="final-cta-copy"><span className="eyebrow">Breizh Food · chez vous</span><h2>Um pequeno sabor<br />da Bretanha&nbsp;?</h2><p>Os sabores da Bretanha, diretamente em sua casa.</p><Link to="/commander" className="brand-link brand-link--gold">Encomendar para casa <ArrowRight size={16} /></Link></Reveal>
+        <Reveal className="final-cta-copy"><span className="eyebrow">Breizh Food · chez vous</span><h2>Um pequeno sabor<br />de <em>Bretagne</em>&nbsp;?</h2><p>Os sabores da Bretanha, diretamente em sua casa.</p><Link to="/commander" className="brand-link brand-link--gold">Encomendar para casa <ArrowRight size={16} /></Link></Reveal>
       </section>
     </>
   );
