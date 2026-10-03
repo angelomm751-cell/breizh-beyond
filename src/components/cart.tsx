@@ -67,10 +67,10 @@ export function CartDrawer() {
       <aside className="cart-drawer" aria-label="O seu carrinho" aria-modal="true" role="dialog">
         <div className="cart-head">
           <div><span className="eyebrow">A sua seleção</span><h2>O carrinho</h2></div>
-          <button className="icon-button" onClick={close} aria-label="Fermer"><X /></button>
+          <button className="icon-button" onClick={close} aria-label="Fechar"><X /></button>
         </div>
         <div className="cart-lines">
-          {lines.length === 0 && <div className="cart-empty"><ShoppingBag /><p>O seu carrinho attend une touche de Bretagne.</p></div>}
+          {lines.length === 0 && <div className="cart-empty"><ShoppingBag /><p>O seu carrinho espera por um sabor da Bretanha.</p></div>}
           {lines.map(({ product, quantity }) => (
             <article className="cart-line" key={product.id}>
               <img src={product.image} alt="" width={120} height={120} />
