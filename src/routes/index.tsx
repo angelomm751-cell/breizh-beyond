@@ -66,7 +66,7 @@ function Index() {
       </section>
 
       <section className="menu-preview boutique-preview">
-        <Reveal className="section-heading"><span className="eyebrow">03 · La boutique</span><h2>Os nossos favoritos,<br /><em>pour savourer em Portugal.</em></h2><p>Crepes, mini pancakes e algodão doce — <em>une petite touche de Bretagne</em>, feita na hora.</p><Link to="/commander" className="text-link">Ver produtos e encomendar <ArrowRight size={16} /></Reveal>
+        <Reveal className="section-heading"><span className="eyebrow">03 · La boutique</span><h2>Os nossos favoritos,<br /><em>pour savourer em Portugal.</em></h2><p>Crepes, mini pancakes e algodão doce — <em>une petite touche de Bretagne</em>, feita na hora.</p><Link to="/commander" className="text-link">Ver produtos e encomendar <ArrowRight size={16} /></Link></Reveal>
         <div className="product-grid">{products.slice(6, 8).map((product, index) => <ProductCard product={product} index={index} key={product.id} />)}</div>
       </section>
 
