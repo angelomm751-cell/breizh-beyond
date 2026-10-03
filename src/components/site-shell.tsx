@@ -47,7 +47,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
             <Link key={link.to} to={link.to} onClick={() => setMenuOpen(false)} style={{ "--i": index } as React.CSSProperties}><span>0{index + 1}</span>{link.label}</Link>
           ))}
         </nav>
-        <div className="mobile-menu-foot"><span>Bretagne · France · Portugal</span><span>48.2020° N — 38.7223° N</span></div>
+        <div className="mobile-menu-foot"><span>Bretanha · França · Portugal</span><span>48.2020° N — 38.7223° N</span></div>
       </div>
 
       <main>{children}</main>
