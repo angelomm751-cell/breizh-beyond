@@ -225,13 +225,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CuisineRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/gestao': {
-      id: '/gestao'
-      path: '/gestao'
-      fullPath: '/gestao'
-      preLoaderRoute: typeof GestaoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/galerie': {
       id: '/galerie'
       path: '/galerie'
