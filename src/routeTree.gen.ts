@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CommanderRouteImport } from './routes/commander'
+import { Route as DemoEncomendaRouteImport } from './routes/demo-encomenda'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CuisineRouteImport } from './routes/cuisine'
 import { Route as GalerieRouteImport } from './routes/galerie'
@@ -39,6 +40,11 @@ const CheckoutRoute = CheckoutRouteImport.update({
 const CommanderRoute = CommanderRouteImport.update({
   id: '/commander',
   path: '/commander',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoEncomendaRoute = DemoEncomendaRouteImport.update({
+  id: '/demo-encomenda',
+  path: '/demo-encomenda',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -83,6 +89,7 @@ export interface FileRoutesByFullPath {
   '/checkout': typeof CheckoutRoute
   '/commander': typeof CommanderRoute
   '/contact': typeof ContactRoute
+  '/demo-encomenda': typeof DemoEncomendaRoute
   '/cuisine': typeof CuisineRoute
   '/galerie': typeof GalerieRoute
   '/la-carte': typeof LaCarteRoute
@@ -125,6 +132,7 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/commander'
     | '/contact'
+    | '/demo-encomenda'
     | '/cuisine'
     | '/galerie'
     | '/la-carte'
@@ -268,6 +276,7 @@ const rootRouteChildren: RootRouteChildren = {
   CheckoutRoute: CheckoutRoute,
   CommanderRoute: CommanderRoute,
   ContactRoute: ContactRoute,
+  DemoEncomendaRoute: DemoEncomendaRoute,
   CuisineRoute: CuisineRoute,
   GalerieRoute: GalerieRoute,
   LaCarteRoute: LaCarteRoute,
