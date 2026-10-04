@@ -108,11 +108,12 @@ export const adminUploadImage = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     checkPin(data.pin);
     const match = /^data:(image\/(jpeg|png|webp));base64,(.+)$/.exec(data.dataUrl);
-    if (!match) throw new Error("Formato de imagem inválido (JPG, PNG ou WEBP).");
-    const bytes = Buffer.from(match[3], "base64");
-    const path = `${crypto.randomUUID()}.${match[2] === "jpeg" ? "jpg" : match[2]}`;
+    const mime = match?.[1], ext = match?.[2], b64 = match?.[3];
+    if (!mime || !ext || !b64) throw new Error("Formato de imagem inválido (JPG, PNG ou WEBP).");
+    const bytes = Buffer.from(b64, "base64");
+    const path = `${crypto.randomUUID()}.${ext === "jpeg" ? "jpg" : ext}`;
     const db = await admin();
-    const { error } = await db.storage.from("menu").upload(path, bytes, { contentType: match[1] });
+    const { error } = await db.storage.from("menu").upload(path, bytes, { contentType: mime });
     if (error) throw new Error("Erro no envio da imagem.");
     const { data: signed } = await db.storage.from("menu").createSignedUrl(path, 60 * 60 * 24 * 365 * 10);
     if (!signed) throw new Error("Erro no envio da imagem.");
