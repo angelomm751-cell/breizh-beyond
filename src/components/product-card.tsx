@@ -15,24 +15,24 @@ const pancakeToppings = [
 
 export function ProductCard({ product, index, menuProduct }: { product: Product; index: number; menuProduct?: Product }) {
   const { add } = useCart();
-  const [choice, setChoice] = useState<{ product: Product; toppings: string[] } | null>(null);
+  const [choice, setChoice] = useState<{ product: Product; toppings: string[]; sauce: string } | null>(null);
 
   const needsToppings = product.category === "Desserts" && product.name.startsWith("Mini Pancakes");
 
   const choose = (selected: Product) => {
-    if (needsToppings) setChoice({ product: selected, toppings: [] });
-    else add(selected);
+    setChoice({ product: selected, toppings: [], sauce: selected.category === "Mini Pancakes" ? "Nutella®" : "" });
   };
 
   const confirmChoice = () => {
-    if (!choice || choice.toppings.length !== 2) return;
+    if (!choice) return;
+    if (needsToppings && choice.toppings.length !== 2) return;
     const toppingLabel = choice.toppings.join(", ");
-    const sauce = pancakeSauces[0];
+    const sauce = choice.sauce;
     const customized = {
       ...choice.product,
       id: `${choice.product.id}__toppings__${sauce}__${choice.toppings.join("|")}`,
       name: `${choice.product.name} · ${sauce} · ${toppingLabel}`,
-      description: `${choice.product.description} Molho: ${sauce}. Toppings: ${toppingLabel}.`,
+      description: `${choice.product.description}${sauce ? ` Molho: ${sauce}.` : ""}${toppingLabel ? ` Toppings: ${toppingLabel}.` : ""}`,
     };
     add(customized);
     setChoice(null);
@@ -58,14 +58,7 @@ export function ProductCard({ product, index, menuProduct }: { product: Product;
             <div className="product-title-row"><strong>{formatPrice(product.price)}</strong></div>
           )}
           <p>{product.description.replace(/ Menu com.*$/i, "")}</p>
-          {menuProduct ? (
-            <div className="product-actions">
-              <Button tone="ghost" onClick={() => choose(product)}><Plus size={15} /> Só</Button>
-              <Button tone="ghost" onClick={() => choose(menuProduct)}><Plus size={15} /> Menu</Button>
-            </div>
-          ) : (
-            <Button tone="ghost" onClick={() => choose(product)}><Plus size={15} /> Adicionar</Button>
-          )}
+          <Button tone="ghost" onClick={() => choose(product)}><Plus size={15} /> Escolher</Button>
         </div>
       </article>
 
@@ -75,13 +68,12 @@ export function ProductCard({ product, index, menuProduct }: { product: Product;
             <button className="icon-button" onClick={() => setChoice(null)} aria-label="Fechar"><X /></button>
             <span className="eyebrow">Personalizar</span>
             <h2>{choice.product.name}</h2>
-            <p>1 molho + 2 toppings incluídos.</p>
-            <div><strong>Molho</strong><div className="topping-options"><span className="topping-option is-selected">{pancakeSauces[0]}</span></div></div>
-            <div><strong>Toppings · escolha 2</strong><div className="topping-options">{pancakeToppings.map((t) => {
+            {menuProduct && <div className="topping-options"><button type="button" className={choice.product.id === product.id ? "topping-option is-selected" : "topping-option"} onClick={() => setChoice({ ...choice, product })}>Só · {formatPrice(product.price)}</button><button type="button" className={choice.product.id === menuProduct.id ? "topping-option is-selected" : "topping-option"} onClick={() => setChoice({ ...choice, product: menuProduct })}>Menu · {formatPrice(menuProduct.price)}</button></div>}
+            {choice.product.category === "Mini Pancakes" ? <><p>1 molho + 2 toppings incluídos.</p><div><strong>Molho</strong><div className="topping-options"><span className="topping-option is-selected">{pancakeSauces[0]}</span></div></div><div><strong>Toppings · escolha 2</strong><div className="topping-options">{pancakeToppings.map((t) => {
               const selected = choice.toppings.includes(t);
               return <button type="button" className={selected ? "topping-option is-selected" : "topping-option"} key={t} onClick={() => setChoice({ ...choice, toppings: selected ? choice.toppings.filter((x) => x !== t) : choice.toppings.length < 2 ? [...choice.toppings, t] : choice.toppings })}>{t}</button>;
-            })}</div></div>
-            <Button tone="gold" disabled={choice.toppings.length !== 2} onClick={confirmChoice}>Adicionar ao carrinho</Button>
+            })}</div></div></> : <><p>Escolhe o molho, se aplicável.</p><div className="topping-options">{["Ketchup", "Maionese", "Mostarda", "Molho Burger"].map((sauce) => <button type="button" key={sauce} className={choice.sauce === sauce ? "topping-option is-selected" : "topping-option"} onClick={() => setChoice({ ...choice, sauce })}>{sauce}</button>)}</div></>}
+            <Button tone="gold" disabled={needsToppings && choice.toppings.length !== 2} onClick={confirmChoice}>Adicionar ao carrinho</Button>
           </div>
         </div>
       )}
