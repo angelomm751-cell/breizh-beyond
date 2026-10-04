@@ -140,17 +140,17 @@ iframe[title*="Lovable" i] { display:none !important; visibility:hidden !importa
 .demo-real-map .leaflet-control-zoom{border:0!important;box-shadow:0 4px 14px rgba(0,0,0,.15)!important}
 .demo-real-map .leaflet-control-zoom a{color:#222!important}
 .breizh-map-icon{background:transparent!important;border:0!important;overflow:visible}
-.breizh-map-pin{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:11px;box-shadow:0 5px 16px rgba(0,0,0,.3);border:3px solid white}
-.breizh-map-pin span{display:block}
-.breizh-map-pin--shop{background:var(--wine);color:white}
-.breizh-map-pin--home{background:var(--primary);color:white;font-size:19px}
+.breizh-map-pin{width:18px;height:18px;border-radius:50%;box-shadow:0 4px 12px rgba(0,0,0,.28);border:3px solid #fff;position:relative}
+.breizh-map-pin--shop{background:var(--wine)}
+.breizh-map-pin--home{background:var(--primary)}
 .breizh-map-label{background:#fff!important;border:1px solid rgba(20,20,20,.18)!important;color:#171717!important;border-radius:3px!important;padding:5px 8px!important;box-shadow:0 3px 12px rgba(0,0,0,.2)!important;font:700 10px/1 var(--font-sans)!important;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
 .breizh-map-label:before{border-top-color:#fff!important}
-.breizh-route-arrow{position:relative;width:38px;height:38px;border-radius:50%;background:var(--gold);border:3px solid #fff;box-shadow:0 5px 16px rgba(0,0,0,.32);transform-origin:center;transition:transform .15s linear}
-.breizh-route-arrow:before{content:"";position:absolute;left:10px;top:10px;width:15px;height:15px;border-left:4px solid var(--primary);border-top:4px solid var(--primary);transform:rotate(45deg)}
-.breizh-route-arrow:after{content:"";position:absolute;left:17px;top:12px;width:4px;height:17px;background:var(--primary);border-radius:3px}
+.breizh-route-arrow{position:relative;width:44px;height:44px;border-radius:50%;background:var(--gold);border:3px solid #fff;box-shadow:0 6px 20px rgba(0,0,0,.35);transform-origin:center;transition:transform .12s linear;display:block}
+.breizh-route-arrow:before{content:"";position:absolute;left:14px;top:9px;width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-bottom:21px solid var(--primary);transform:rotate(0deg);filter:drop-shadow(0 1px 1px rgba(0,0,0,.2))}
+.breizh-route-arrow:after{content:"";position:absolute;left:19px;top:25px;width:10px;height:8px;background:var(--primary);border-radius:2px}
 .breizh-route-arrow.is-arrived{animation:route-arrival 2.2s ease-out both}
-.demo-map-badge{position:absolute;z-index:500;top:12px;left:12px;display:flex;align-items:center;gap:.4rem;padding:.6rem .75rem;background:rgba(20,20,20,.88);color:white;font-size:9px;text-transform:uppercase;letter-spacing:.1em}
+.demo-map-badge{position:absolute;z-index:500;top:14px;left:14px;display:flex;align-items:center;gap:.7rem;padding:.7rem 1rem;background:rgba(18,18,18,.92);color:white;border:1px solid rgba(255,255,255,.16);border-radius:999px;box-shadow:0 8px 24px rgba(0,0,0,.2);backdrop-filter:blur(10px);font-size:9px;text-transform:uppercase;letter-spacing:.12em}
+.demo-map-name{font-weight:700;white-space:nowrap}.demo-map-arrow{color:var(--gold);font-size:14px;line-height:1}.demo-step-arrow{display:inline-block;width:12px;height:12px;margin-right:.45rem;border-right:2px solid currentColor;border-top:2px solid currentColor;transform:rotate(45deg);vertical-align:-1px}
 .demo-map-fallback{position:absolute;inset:0;z-index:600;display:grid;place-content:center;justify-items:center;gap:.6rem;background:var(--card);text-align:center;padding:2rem}
 .demo-map-fallback span{max-width:320px;color:var(--muted-foreground);font-size:11px}
 @keyframes demo-bike-pulse{50%{transform:scale(1.08)}}
