@@ -10,12 +10,19 @@ async function fetchMenu(): Promise<Product[]> {
     .select("id,name,category,description,price,image,position")
     .eq("available", true)
     .order("sort_order");
-  // The database may still contain the old demonstration menu. Until it is
-  // explicitly updated in the admin, use the new bundled menu so the public
-  // ementa always shows the confirmed prices/items.
+
+  // Only use the database when it contains the complete confirmed menu.
+  // If the database still has the old/demo menu, use the bundled menu instead.
   const expectedIds = new Set(fallback.map((p) => p.id));
-  const hasCurrentMenu = !error && Array.isArray(data) && data.length > 0 && data.some((row) => expectedIds.has(row.id));
-  if (!hasCurrentMenu) return fallback;
+  const databaseIds = new Set(Array.isArray(data) ? data.map((row) => row.id) : []);
+  const hasCompleteMenu =
+    !error &&
+    Array.isArray(data) &&
+    expectedIds.size > 0 &&
+    [...expectedIds].every((id) => databaseIds.has(id));
+
+  if (!hasCompleteMenu) return fallback;
+
   return data.map((row) => ({
     id: row.id,
     name: row.name,
@@ -27,8 +34,14 @@ async function fetchMenu(): Promise<Product[]> {
   }));
 }
 
-/** Live menu edited from /admin; falls back to the bundled demo menu. */
+/** Live menu edited from /admin; falls back to the complete bundled menu. */
 export function useMenu() {
-  const { data } = useQuery({ queryKey: menuQueryKey, queryFn: fetchMenu, initialData: fallback, initialDataUpdatedAt: 0, staleTime: 60_000 });
+  const { data } = useQuery({
+    queryKey: menuQueryKey,
+    queryFn: fetchMenu,
+    initialData: fallback,
+    initialDataUpdatedAt: 0,
+    staleTime: 60_000,
+  });
   return data;
 }
