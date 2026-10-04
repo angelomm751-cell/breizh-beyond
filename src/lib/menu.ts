@@ -35,7 +35,7 @@ export const resolveImage = (value: string) => (value.startsWith("local:") ? loc
 export const categories: Category[] = ["Galettes", "Crêpes", "Spécialités", "Desserts", "Boissons"];
 
 /** Delivery fee rules (demo values — confirm with the restaurant). */
-export const DELIVERY_FEE = 4.5;
+export const DELIVERY_FEE = 4.0;
 export const FREE_DELIVERY_FROM = 35;
 export const deliveryFeeFor = (subtotal: number, mode: "home" | "pickup") => (mode === "pickup" || subtotal >= FREE_DELIVERY_FROM || subtotal === 0 ? 0 : DELIVERY_FEE);
 
