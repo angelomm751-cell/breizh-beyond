@@ -45,7 +45,7 @@ export const createOrder = createServerFn({ method: "POST" })
     const { data: row, error: insErr } = await db.from("orders").insert({
       customer_name: data.name, phone: data.phone, email: data.email,
       address: data.address, postal: data.postal, city: data.city, notes: data.notes,
-      delivery: data.delivery, payment: data.payment, items,
+      delivery: data.delivery, payment: data.payment, payment_status: "pending", items,
       subtotal, delivery_fee: fee, total: subtotal + fee,
     }).select("id").single();
     if (insErr || !row) throw new Error("Não foi possível registar a encomenda.");
@@ -56,7 +56,7 @@ export const getOrder = createServerFn({ method: "GET" })
   .inputValidator((d) => z.object({ id: z.string().uuid() }).parse(d))
   .handler(async ({ data }) => {
     const db = await admin();
-    const { data: o } = await db.from("orders").select("number,status,delivery,payment,items,subtotal,delivery_fee,total,created_at,customer_name").eq("id", data.id).maybeSingle();
+    const { data: o } = await db.from("orders").select("number,status,delivery,payment,payment_status,items,subtotal,delivery_fee,total,created_at,customer_name").eq("id", data.id).maybeSingle();
     if (!o) return null;
     return { ...o, customer_name: o.customer_name.split(" ")[0], items: o.items as { name: string; quantity: number; price: number }[], subtotal: Number(o.subtotal), delivery_fee: Number(o.delivery_fee), total: Number(o.total) };
   });
@@ -127,6 +127,15 @@ export const kitchenListOrders = createServerFn({ method: "POST" })
     const since = new Date(Date.now() - 1000 * 60 * 60 * 36).toISOString();
     const { data: rows } = await (await admin()).from("orders").select("*").gte("created_at", since).order("created_at", { ascending: false });
     return (rows ?? []).map((o) => ({ ...o, items: o.items as { name: string; quantity: number }[], total: Number(o.total) }));
+  });
+
+export const kitchenSetPaid = createServerFn({ method: "POST" })
+  .inputValidator((d) => pinSchema.extend({ id: z.string().uuid() }).parse(d))
+  .handler(async ({ data }) => {
+    checkPin(data.pin);
+    const { error } = await (await admin()).from("orders").update({ payment_status: "paid", updated_at: new Date().toISOString() }).eq("id", data.id);
+    if (error) throw new Error("Não foi possível marcar o pagamento.");
+    return { ok: true };
   });
 
 export const kitchenSetStatus = createServerFn({ method: "POST" })
