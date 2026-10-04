@@ -1,7 +1,8 @@
+import { useMenu } from "@/hooks/use-menu";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { ProductCard } from "@/components/product-card";
-import { products, type Category } from "@/lib/menu";
+import { type Category } from "@/lib/menu";
 
 const categories = ["Tudo", "Galettes", "Crepes", "Especialidades", "Sobremesas", "Bebidas"] as const;
 export const Route = createFileRoute("/la-carte")({ head: () => ({ meta: [

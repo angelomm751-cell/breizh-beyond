@@ -1,8 +1,9 @@
+import { useMenu } from "@/hooks/use-menu";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ShoppingBag } from "lucide-react";
 import { ProductCard } from "@/components/product-card";
 import { useCart } from "@/components/cart";
-import { formatPrice, products } from "@/lib/menu";
+import { formatPrice, } from "@/lib/menu";
 
 export const Route = createFileRoute("/commander")({ head: () => ({ meta: [
   { title: "Encomendar para Casa — BREIZH FOOD" }, { name: "description", content: "Encomende os sabores da Bretanha diretamente para a sua casa." },
