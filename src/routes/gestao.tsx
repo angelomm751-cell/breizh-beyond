@@ -78,6 +78,19 @@ function Dashboard({ pin, logout }: { pin: string; logout: () => void }) {
         <button className="text-link" onClick={logout}>Sair</button>
       </header>
 
+      <section className="management-demo-order">
+        <div><span className="eyebrow">Demonstração · sem pagamento</span><h2>Pedido #BF-DEMO-001</h2><p>Cliente Demo · Entrega ao domicílio · <strong>✓ Pago</strong></p></div>
+        <div className="demo-order-status"><span>🚗</span><strong>A caminho</strong><small>Estafeta em trânsito · ≈ 12 min</small></div>
+        <div className="demo-order-map">
+          <div className="demo-map-route" />
+          <span className="demo-map-start">📍 Breizh Food</span>
+          <span className="demo-map-end">📍 Destino</span>
+          <span className="demo-map-truck">🚚</span>
+        </div>
+        <div className="demo-order-steps"><span>✓ Pago</span><span>✓ Preparado</span><strong>🚗 A caminho</strong><span>○ Entregue</span></div>
+        <small className="demo-order-note">Pedido fictício apenas para demonstração. Não é uma encomenda real.</small>
+      </section>
+
       <section className="management-stats" aria-label="Resumo">
         <article><span>Novos pedidos</span><strong>{pending}</strong></article>
         <article><span>Em preparação</span><strong>{preparing}</strong></article>
