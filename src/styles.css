@@ -189,3 +189,17 @@ iframe[title*="Lovable" i] { display:none !important; visibility:hidden !importa
 .delivery-demo>.demo-note{text-align:center;margin-top:1.2rem}
 @keyframes demo-drive{0%,100%{transform:translateX(-25px) rotate(-11deg)}50%{transform:translateX(25px) rotate(-11deg)}}
 @media(max-width:700px){.delivery-demo-head{flex-direction:column}.delivery-demo-map{min-height:390px}.delivery-demo-status{flex-direction:column}.demo-timeline{grid-template-columns:1fr 1fr;gap:1rem}.demo-place{max-width:42%}.demo-place small{display:none}}
+
+.management-demo-order{margin:1.5rem 0 2rem;padding:1.25rem;background:var(--card);border:1px solid var(--gold);box-shadow:0 10px 35px oklch(0.1 0.02 248 / .08)}
+.management-demo-order h2{margin:.35rem 0;font-size:1.35rem}.management-demo-order p{margin:0;font-size:11px;color:var(--muted-foreground)}
+.management-demo-order p strong{color:var(--wine)}
+.demo-order-status{margin-top:1rem;display:flex;align-items:center;gap:.55rem}.demo-order-status span{font-size:1.7rem}.demo-order-status strong{font-size:1rem}.demo-order-status small{color:var(--muted-foreground);font-size:9px}
+.demo-order-map{height:180px;margin-top:1rem;position:relative;overflow:hidden;background:var(--muted);border:1px solid var(--border);background-image:linear-gradient(25deg,transparent 48%,color-mix(in oklab,var(--border) 80%,transparent) 49%,transparent 51%),linear-gradient(110deg,transparent 48%,color-mix(in oklab,var(--border) 80%,transparent) 49%,transparent 51%);background-size:90px 70px}
+.demo-map-route{position:absolute;left:17%;top:58%;width:66%;height:3px;background:var(--gold);transform:rotate(-14deg)}
+.demo-map-start,.demo-map-end{position:absolute;padding:.45rem .6rem;background:var(--card);border:1px solid var(--border);font-size:8px;box-shadow:0 4px 12px oklch(0.1 0.02 248 / .12)}
+.demo-map-start{left:5%;bottom:15%}.demo-map-end{right:5%;top:13%}
+.demo-map-truck{position:absolute;left:52%;top:43%;font-size:1.5rem;animation:demo-dashboard-drive 2.5s ease-in-out infinite}
+.demo-order-steps{display:flex;justify-content:space-between;gap:.6rem;padding-top:1rem;font-size:8px;color:var(--muted-foreground);text-transform:uppercase;letter-spacing:.06em}
+.demo-order-steps strong{color:var(--wine)}.demo-order-note{display:block;margin-top:1rem;color:var(--muted-foreground);font-size:8px}
+@keyframes demo-dashboard-drive{0%,100%{transform:translate(-22px,-2px) rotate(-4deg)}50%{transform:translate(22px,2px) rotate(4deg)}}
+@media(max-width:700px){.demo-order-steps{flex-wrap:wrap}.demo-order-steps span,.demo-order-steps strong{flex:1 1 40%}}
