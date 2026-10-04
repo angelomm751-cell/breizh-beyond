@@ -10,7 +10,7 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
-import appCss from "../styles.css?inline";
+import "../styles.css";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteShell } from "../components/site-shell";
 
