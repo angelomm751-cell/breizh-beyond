@@ -9,9 +9,6 @@ import maisonImage from "@/assets/breizh-maison.jpg";
 import { Reveal } from "@/components/reveal";
 import { ProductCard } from "@/components/product-card";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
   head: () => ({ meta: [
     { title: "BREIZH FOOD — Da Bretanha a Portugal" },
@@ -24,9 +21,17 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   const products = useMenu();
+  const pairedProducts = products
+    .filter((product) => !product.name.endsWith(" · Menu"))
+    .map((product) => ({
+      product,
+      menuProduct: products.find((candidate) =>
+        candidate.name === product.name.replace(/ · Só$/i, " · Menu")
+      ),
+    }));
+
   return (
     <>
       <section className="hero">
@@ -63,12 +68,12 @@ function Index() {
 
       <section className="menu-preview">
         <Reveal className="section-heading"><span className="eyebrow">02 · La carte</span><h2>Clássicos,<br /><em>à notre manière.</em></h2><Link to="/la-carte" className="text-link">Ver toda a ementa <ArrowRight size={16} /></Link></Reveal>
-        <div className="product-grid">{products.slice(0, 3).map((product, index) => <ProductCard product={product} index={index} key={product.id} />)}</div>
+        <div className="product-grid">{pairedProducts.slice(0, 3).map(({ product, menuProduct }, index) => <ProductCard product={product} menuProduct={menuProduct} index={index} key={product.id} />)}</div>
       </section>
 
       <section className="menu-preview boutique-preview">
         <Reveal className="section-heading"><span className="eyebrow">03 · La boutique</span><h2>Os nossos favoritos,<br /><em>pour savourer em Portugal.</em></h2><p>Crepes, mini pancakes e algodão doce — <em>une petite touche de Bretagne</em>, feita na hora.</p><Link to="/commander" className="text-link">Ver produtos e encomendar <ArrowRight size={16} /></Link></Reveal>
-        <div className="product-grid">{products.slice(6, 8).map((product, index) => <ProductCard product={product} index={index} key={product.id} />)}</div>
+        <div className="product-grid">{pairedProducts.slice(3, 5).map(({ product, menuProduct }, index) => <ProductCard product={product} menuProduct={menuProduct} index={index} key={product.id} />)}</div>
       </section>
 
       <section className="wood-section">
