@@ -134,16 +134,24 @@ iframe[title*="Lovable" i] { display:none !important; visibility:hidden !importa
 .demo-fake-cart strong:last-child{color:var(--wine)}.demo-fake-cart b{font-size:10px}
 .demo-confirm{display:inline-flex;align-items:center;gap:.5rem;border:0;cursor:pointer}
 .demo-paid{display:inline-flex;align-items:center;gap:.4rem;color:var(--wine);font-size:9px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:1.2rem}
-.demo-real-map-wrap{height:430px;position:relative;overflow:hidden;border:1px solid var(--border);background:#ddd}
-.demo-real-map{position:absolute;inset:0;z-index:1}
+.demo-real-map-wrap{width:100%;height:430px;position:relative;overflow:hidden;border:1px solid var(--border);background:#d9d9d9;isolation:isolate}
+.demo-real-map{position:absolute;inset:0;width:100%;height:100%;z-index:1}
+.demo-real-map .leaflet-container{width:100%;height:100%;font-family:var(--font-sans)}
 .demo-real-map .leaflet-control-zoom{border:0!important;box-shadow:0 4px 14px rgba(0,0,0,.15)!important}
 .demo-real-map .leaflet-control-zoom a{color:#222!important}
-.breizh-map-icon{background:transparent!important;border:0!important}
-.breizh-map-pin{width:40px;height:40px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:grid;place-items:center;font-weight:800;font-size:11px;box-shadow:0 4px 12px rgba(0,0,0,.28);border:3px solid white}
-.breizh-map-pin::first-letter{transform:rotate(45deg)}
+.breizh-map-icon{background:transparent!important;border:0!important;overflow:visible}
+.breizh-map-pin{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:11px;box-shadow:0 5px 16px rgba(0,0,0,.3);border:3px solid white}
+.breizh-map-pin span{display:block}
 .breizh-map-pin--shop{background:var(--wine);color:white}
-.breizh-map-pin--home{background:var(--primary);color:white;font-size:18px}
-.breizh-map-bike{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--gold);border:3px solid white;box-shadow:0 4px 14px rgba(0,0,0,.3);font-size:21px;animation:demo-bike-pulse 1s ease-in-out infinite}
+.breizh-map-pin--home{background:var(--primary);color:white;font-size:19px}
+.breizh-map-label{background:#fff!important;border:1px solid rgba(20,20,20,.18)!important;color:#171717!important;border-radius:3px!important;padding:5px 8px!important;box-shadow:0 3px 12px rgba(0,0,0,.2)!important;font:700 10px/1 var(--font-sans)!important;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.breizh-map-label:before{border-top-color:#fff!important}
+.breizh-delivery-bike{position:relative;width:58px;height:48px;filter:drop-shadow(0 4px 4px rgba(0,0,0,.35))}
+.breizh-bike-body{position:absolute;left:12px;top:13px;width:35px;height:17px;border-radius:11px 15px 7px 7px;background:var(--gold);border:3px solid #fff;transform:skewX(-8deg)}
+.breizh-bike-body:after{content:"";position:absolute;left:15px;top:-10px;width:15px;height:11px;border-radius:8px 8px 2px 2px;background:var(--primary);border:2px solid #fff}
+.breizh-bike-wheel{position:absolute;bottom:2px;width:14px;height:14px;border-radius:50%;background:#202020;border:3px solid #fff}
+.breizh-bike-wheel--back{left:9px}.breizh-bike-wheel--front{right:6px}
+.breizh-bike-light{position:absolute;right:0;top:19px;width:7px;height:7px;border-radius:50%;background:#fff;border:1px solid #222}
 .demo-map-badge{position:absolute;z-index:500;top:12px;left:12px;display:flex;align-items:center;gap:.4rem;padding:.6rem .75rem;background:rgba(20,20,20,.88);color:white;font-size:9px;text-transform:uppercase;letter-spacing:.1em}
 .demo-map-fallback{position:absolute;inset:0;z-index:600;display:grid;place-content:center;justify-items:center;gap:.6rem;background:var(--card);text-align:center;padding:2rem}
 .demo-map-fallback span{max-width:320px;color:var(--muted-foreground);font-size:11px}
