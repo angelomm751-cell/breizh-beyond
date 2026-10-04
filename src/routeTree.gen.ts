@@ -92,7 +92,6 @@ export interface FileRoutesByFullPath {
   '/cuisine': typeof CuisineRoute
   '/galerie': typeof GalerieRoute
   '/gestao': typeof GestaoRoute
-  '/gestao': typeof GestaoRoute
   '/la-carte': typeof LaCarteRoute
   '/merci': typeof MerciRoute
   '/notre-histoire': typeof NotreHistoireRoute
@@ -106,6 +105,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/cuisine': typeof CuisineRoute
   '/galerie': typeof GalerieRoute
+  '/gestao': typeof GestaoRoute
   '/la-carte': typeof LaCarteRoute
   '/merci': typeof MerciRoute
   '/notre-histoire': typeof NotreHistoireRoute
@@ -120,6 +120,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/cuisine': typeof CuisineRoute
   '/galerie': typeof GalerieRoute
+  '/gestao': typeof GestaoRoute
   '/la-carte': typeof LaCarteRoute
   '/merci': typeof MerciRoute
   '/notre-histoire': typeof NotreHistoireRoute
@@ -135,6 +136,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/cuisine'
     | '/galerie'
+    | '/gestao'
     | '/la-carte'
     | '/merci'
     | '/notre-histoire'
@@ -148,6 +150,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/cuisine'
     | '/galerie'
+    | '/gestao'
     | '/la-carte'
     | '/merci'
     | '/notre-histoire'
@@ -161,6 +164,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/cuisine'
     | '/galerie'
+    | '/gestao'
     | '/la-carte'
     | '/merci'
     | '/notre-histoire'
