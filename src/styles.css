@@ -134,12 +134,20 @@ iframe[title*="Lovable" i] { display:none !important; visibility:hidden !importa
 .demo-fake-cart strong:last-child{color:var(--wine)}.demo-fake-cart b{font-size:10px}
 .demo-confirm{display:inline-flex;align-items:center;gap:.5rem;border:0;cursor:pointer}
 .demo-paid{display:inline-flex;align-items:center;gap:.4rem;color:var(--wine);font-size:9px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:1.2rem}
-.demo-live-map{height:430px;position:relative;overflow:hidden;background:var(--muted);border:1px solid var(--border);background-image:linear-gradient(28deg,transparent 48%,color-mix(in oklab,var(--border) 80%,transparent) 49%,transparent 51%),linear-gradient(110deg,transparent 48%,color-mix(in oklab,var(--border) 80%,transparent) 49%,transparent 51%);background-size:100px 80px}
-.demo-live-route{position:absolute;left:15%;top:59%;width:70%;height:4px;background:var(--gold);transform:rotate(-14deg)}
-.demo-live-place{position:absolute;display:flex;flex-direction:column;gap:.2rem;padding:.7rem;background:var(--card);border:1px solid var(--border);font-size:10px;box-shadow:0 8px 20px oklch(0.1 0.02 248 / .12)}.demo-live-place svg{color:var(--wine)}.demo-live-place small{font-size:8px;color:var(--muted-foreground)}
-.demo-live-start{left:5%;bottom:13%}.demo-live-end{right:5%;top:12%}
-.demo-live-truck{position:absolute;left:50%;top:44%;display:flex;align-items:center;gap:.4rem;background:var(--primary);color:var(--primary-foreground);padding:.65rem .8rem;border:1px solid var(--gold);font-size:9px;text-transform:uppercase;animation:demo-live-drive 3s ease-in-out infinite}
-.demo-live-eta{position:absolute;right:10%;bottom:12%;padding:.6rem .8rem;background:var(--gold);color:var(--primary);font-size:10px}
+.demo-real-map-wrap{height:430px;position:relative;overflow:hidden;border:1px solid var(--border);background:#ddd}
+.demo-real-map{position:absolute;inset:0;z-index:1}
+.demo-real-map .leaflet-control-zoom{border:0!important;box-shadow:0 4px 14px rgba(0,0,0,.15)!important}
+.demo-real-map .leaflet-control-zoom a{color:#222!important}
+.breizh-map-icon{background:transparent!important;border:0!important}
+.breizh-map-pin{width:40px;height:40px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:grid;place-items:center;font-weight:800;font-size:11px;box-shadow:0 4px 12px rgba(0,0,0,.28);border:3px solid white}
+.breizh-map-pin::first-letter{transform:rotate(45deg)}
+.breizh-map-pin--shop{background:var(--wine);color:white}
+.breizh-map-pin--home{background:var(--primary);color:white;font-size:18px}
+.breizh-map-bike{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--gold);border:3px solid white;box-shadow:0 4px 14px rgba(0,0,0,.3);font-size:21px;animation:demo-bike-pulse 1s ease-in-out infinite}
+.demo-map-badge{position:absolute;z-index:500;top:12px;left:12px;display:flex;align-items:center;gap:.4rem;padding:.6rem .75rem;background:rgba(20,20,20,.88);color:white;font-size:9px;text-transform:uppercase;letter-spacing:.1em}
+.demo-map-fallback{position:absolute;inset:0;z-index:600;display:grid;place-content:center;justify-items:center;gap:.6rem;background:var(--card);text-align:center;padding:2rem}
+.demo-map-fallback span{max-width:320px;color:var(--muted-foreground);font-size:11px}
+@keyframes demo-bike-pulse{50%{transform:scale(1.08)}}
 .demo-live-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;list-style:none;padding:1.2rem 0 0;margin:0;font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted-foreground)}.demo-live-steps .active{color:var(--wine)}
 .demo-warning{text-align:center!important;max-width:none!important;font-size:9px!important}
 @keyframes demo-live-drive{0%,100%{transform:translateX(-25px) rotate(-3deg)}50%{transform:translateX(25px) rotate(3deg)}}
