@@ -115,16 +115,9 @@ export function ProductCard({
             <h3>{product.name.replace(/ · Só$/i, "")}</h3>
           </div>
 
-          {menuProduct ? (
-            <div className="product-prices">
-              <div><span>Só</span><strong>{formatPrice(product.price)}</strong></div>
-              <div><span>Menu</span><strong>{formatPrice(menuProduct.price)}</strong></div>
-            </div>
-          ) : (
-            <div className="product-title-row">
-              <strong>{formatPrice(product.price)}</strong>
-            </div>
-          )}
+          <div className="product-title-row product-title-row--price">
+            <strong>{formatPrice(product.price)}</strong>
+          </div>
 
           <p>{product.description.replace(/ Menu com.*$/i, "")}</p>
 
@@ -134,7 +127,7 @@ export function ProductCard({
             onClick={openChooser}
             aria-label={`Escolher ${product.name.replace(/ · Só$/i, "")}`}
           >
-            <Plus size={18} /> Escolher
+            <Plus size={18} />
           </Button>
         </div>
       </article>
