@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, Check, MapPin, Truck } from "lucide-react";
 import { useState } from "react";
+import { useCart } from "@/components/cart";
+import { formatPrice } from "@/lib/menu";
 
 export const Route = createFileRoute("/demo-encomenda")({
   head: () => ({ meta: [
@@ -13,6 +15,7 @@ export const Route = createFileRoute("/demo-encomenda")({
 
 function DemoEncomenda() {
   const [started, setStarted] = useState(false);
+  const { lines, total } = useCart();
   return (
     <main className="demo-order-page">
       <Link to="/commander" className="text-link"><ArrowLeft size={14} /> Voltar à encomenda</Link>
@@ -21,7 +24,7 @@ function DemoEncomenda() {
           <span className="eyebrow">Modo demonstração · sem pagamento</span>
           <h1>Experimentar uma <em>encomenda</em></h1>
           <p>Esta é uma simulação para veres como funciona o acompanhamento da entrega. Não é cobrado nada e não cria um pedido real.</p>
-          <div className="demo-fake-cart"><span>Galette Demo × 1</span><strong>8,50 €</strong><span>Crepe Demo × 1</span><strong>6,50 €</strong><b>Total de demonstração</b><strong>15,00 €</strong></div>
+          <div className="demo-fake-cart">{lines.length > 0 ? <>{lines.map(({ product, quantity }) => <><span>{product.name} × {quantity}</span><strong>{formatPrice(product.price * quantity)}</strong></>)}<b>Total</b><strong>{formatPrice(total)}</strong></> : <><span>Exemplo de demonstração</span><strong>0,00 €</strong></>}</div>
           <button className="brand-link brand-link--gold demo-confirm" onClick={() => setStarted(true)}>Fingir encomenda — sem pagar <Truck size={17} /></button>
         </section>
       ) : (
