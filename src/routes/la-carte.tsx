@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ProductCard } from "@/components/product-card";
 import { type Category } from "@/lib/menu";
 
-const categories = ["Tudo", "Galettes", "Crepes", "Especialidades", "Sobremesas", "Bebidas"] as const;
+const categories = ["Tudo", "Galettes", "Burger", "Mini Pancakes"] as const;
 export const Route = createFileRoute("/la-carte")({ head: () => ({ meta: [
   { title: "A Ementa — BREIZH FOOD" }, { name: "description", content: "Galettes de trigo-sarraceno, crepes e especialidades bretonas artesanais." },
   { property: "og:title", content: "A Ementa — BREIZH FOOD" }, { property: "og:description", content: "Descubra a ementa artesanal da BREIZH FOOD." },
@@ -14,7 +14,7 @@ export const Route = createFileRoute("/la-carte")({ head: () => ({ meta: [
 function Carte() {
   const products = useMenu();
   const [active, setActive] = useState<(typeof categories)[number]>("Tudo");
-  const shown = active === "Tudo" ? products : products.filter((p) => p.category === ({ Galettes: "Galettes", Crepes: "Crêpes", Especialidades: "Spécialités", Sobremesas: "Desserts", Bebidas: "Boissons" } as Record<string, Category>)[active]);
+  const shown = active === "Tudo" ? products : products.filter((p) => p.category === ({ Galettes: "Galettes", Burger: "Burger", "Mini Pancakes": "Mini Pancakes" } as Record<string, Category>)[active]);
 
   const pairs = shown.filter((product) => !product.name.endsWith(" · Menu")).map((product) => ({
     product,
