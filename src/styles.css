@@ -180,3 +180,17 @@ iframe[title*="Lovable" i] { display:none !important; visibility:hidden !importa
 .topping-option{border:1px solid var(--border);background:transparent;padding:.7rem .8rem;font-size:11px;cursor:pointer;color:var(--foreground)}
 .topping-option.is-selected{background:var(--primary);color:var(--primary-foreground);border-color:var(--primary)}
 .topping-modal__panel>.brand-button{width:100%;margin-top:.5rem}
+
+/* Product choice flow */
+.product-add-button{display:inline-flex;align-items:center;gap:.35rem}
+.selection-step{display:grid;gap:.75rem;margin:1rem 0 1.5rem}
+.selection-choice{display:flex;align-items:center;justify-content:space-between;gap:1rem;width:100%;padding:1rem 1.1rem;border:1px solid var(--border);background:var(--background);color:var(--foreground);text-align:left;cursor:pointer;transition:transform .18s ease,border-color .18s ease,background .18s ease}
+.selection-choice:hover{transform:translateY(-1px);border-color:var(--primary)}
+.selection-choice>span{display:grid;gap:.2rem}
+.selection-choice strong{font:500 16px var(--font-sans)}
+.selection-choice small{font-size:10px;color:var(--muted-foreground);line-height:1.4}
+.selection-choice b{font:500 14px var(--font-sans);white-space:nowrap}
+.selection-back{display:inline-flex;align-items:center;gap:.25rem;margin:0 0 1rem;padding:0;border:0;background:transparent;color:var(--muted-foreground);font-size:11px;cursor:pointer}
+.selection-back:hover{color:var(--foreground)}
+.selection-section{margin:1.25rem 0}
+.selection-section>strong{font-size:11px;text-transform:uppercase;letter-spacing:.12em}
