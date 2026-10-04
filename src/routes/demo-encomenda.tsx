@@ -81,7 +81,7 @@ function DemoMap() {
           });
 
         const shop = L.marker(START, {
-          icon: markerIcon('<div class="breizh-map-pin breizh-map-pin--shop"><span>BF</span></div>'),
+          icon: markerIcon('<div class="breizh-map-pin breizh-map-pin--shop"></div>'),
           zIndexOffset: 1200,
         }).addTo(map);
 
@@ -93,7 +93,7 @@ function DemoMap() {
         });
 
         const home = L.marker(DEST, {
-          icon: markerIcon('<div class="breizh-map-pin breizh-map-pin--home"><span>⌂</span></div>'),
+          icon: markerIcon('<div class="breizh-map-pin breizh-map-pin--home"></div>'),
           zIndexOffset: 1100,
         }).addTo(map);
 
@@ -196,7 +196,7 @@ function DemoMap() {
           <span>O mapa real volta a carregar quando a ligação estiver disponível.</span>
         </div>
       )}
-      <div className="demo-map-badge"><MapPin size={14} /> BREIZH FOOD <span>→</span> DOMICÍLIO</div>
+      <div className="demo-map-badge"><span className="demo-map-name">BREIZH FOOD</span><span className="demo-map-arrow">→</span><span className="demo-map-name">DOMICÍLIO</span></div>
     </div>
   );
 }
@@ -218,7 +218,7 @@ function DemoEncomenda() {
       <h1>Encomenda <em>a caminho</em></h1>
       <div className="demo-paid"><Check size={15} /> Pagamento simulado · 0 € cobrado</div>
       <DemoMap />
-      <ol className="demo-live-steps"><li>✓ Recebida</li><li>✓ Preparada</li><li className="active">🏍️ A caminho</li><li>○ Entregue</li></ol>
+      <ol className="demo-live-steps"><li>✓ Recebida</li><li>✓ Preparada</li><li className="active"><span className="demo-step-arrow" aria-hidden="true"></span>A caminho</li><li>○ Entregue</li></ol>
       <p className="demo-warning">Demonstração apenas. Não existe cobrança, pedido real ou estafeta real.</p>
     </section>}
   </main>;
