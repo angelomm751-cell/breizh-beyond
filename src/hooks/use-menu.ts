@@ -10,7 +10,12 @@ async function fetchMenu(): Promise<Product[]> {
     .select("id,name,category,description,price,image,position")
     .eq("available", true)
     .order("sort_order");
-  if (error || !data) return fallback;
+  // The database may still contain the old demonstration menu. Until it is
+  // explicitly updated in the admin, use the new bundled menu so the public
+  // ementa always shows the confirmed prices/items.
+  const expectedIds = new Set(fallback.map((p) => p.id));
+  const hasCurrentMenu = !error && Array.isArray(data) && data.length > 0 && data.some((row) => expectedIds.has(row.id));
+  if (!hasCurrentMenu) return fallback;
   return data.map((row) => ({
     id: row.id,
     name: row.name,
