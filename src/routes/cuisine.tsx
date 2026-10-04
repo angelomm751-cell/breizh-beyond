@@ -3,7 +3,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useRef } from "react";
 import { PinGate } from "@/components/pin-gate";
-import { kitchenListOrders, kitchenSetStatus } from "@/lib/shop.functions";
+import { kitchenListOrders, kitchenSetPaid, kitchenSetStatus } from "@/lib/shop.functions";
 import { formatPrice } from "@/lib/menu";
 
 export const Route = createFileRoute("/cuisine")({
@@ -21,6 +21,7 @@ const payLabels: Record<string, string> = { mbway: "MB WAY", card: "Cartão", on
 function Kitchen({ pin, logout }: { pin: string; logout: () => void }) {
   const list = useServerFn(kitchenListOrders);
   const setStatus = useServerFn(kitchenSetStatus);
+  const setPaid = useServerFn(kitchenSetPaid);
   const qc = useQueryClient();
   const { data = [] } = useQuery({ queryKey: ["kitchen"], queryFn: () => list({ data: { pin } }), refetchInterval: 8_000 });
   const seen = useRef<number | null>(null);
@@ -31,6 +32,10 @@ function Kitchen({ pin, logout }: { pin: string; logout: () => void }) {
     }
     seen.current = pending;
   }, [pending]);
+  const markPaid = async (id: string) => {
+    await setPaid({ data: { pin, id } });
+    void qc.invalidateQueries({ queryKey: ["kitchen"] });
+  };
   const move = async (id: string, status: (typeof labels extends Record<infer K, string> ? K : never) & string) => {
     await setStatus({ data: { pin, id, status: status as "pending" } });
     void qc.invalidateQueries({ queryKey: ["kitchen"] });
@@ -51,8 +56,10 @@ function Kitchen({ pin, logout }: { pin: string; logout: () => void }) {
             <p className="kitchen-meta">{o.customer_name} · <a href={`tel:${o.phone}`}>{o.phone}</a></p>
             {o.delivery === "home" && <p className="kitchen-meta"><a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${o.address}, ${o.postal} ${o.city}`)}`} target="_blank" rel="noreferrer">{o.address}, {o.city}</a></p>}
             <p className="kitchen-total">{formatPrice(o.total)}</p>
+            <p className="kitchen-meta">{o.payment_status === "paid" ? "✓ Pago" : "Pagamento pendente"}</p>
             <div className="kitchen-actions">
               {o.status === "pending" && <button onClick={() => move(o.id, "preparing")}>Aceitar e preparar</button>}
+              {o.payment_status !== "paid" && <button className="is-quiet" onClick={() => markPaid(o.id)}>Marcar como pago</button>}
               {o.status === "preparing" && (o.delivery === "home"
                 ? <button onClick={() => move(o.id, "on_the_way")}>Chamar estafeta</button>
                 : <button onClick={() => move(o.id, "ready")}>Pronta a levantar</button>)}
