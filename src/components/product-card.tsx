@@ -251,7 +251,7 @@ export function ProductCard({
 
                 <Button
                   tone="gold"
-                  disabled={!choice.sauce && !choice.toppings.length}
+                  disabled={isPancake ? choice.toppings.length !== 2 : !choice.sauce}
                   onClick={confirmChoice}
                 >
                   <Plus size={16} /> Adicionar ao carrinho
