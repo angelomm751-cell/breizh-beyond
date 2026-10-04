@@ -86,6 +86,7 @@ function Dashboard({ pin, logout }: { pin: string; logout: () => void }) {
 
       <section className="management-actions">
         <Link to="/cuisine" className="management-action"><span>👨‍🍳</span><strong>Cozinha</strong><small>Pedidos em tempo real</small></Link>
+        <Link to="/demo-entrega" className="management-action"><span>🗺️</span><strong>Ver entrega demo</strong><small>Sem pagamento · apenas demonstração</small></Link>
         <Link to="/admin" className="management-action"><span>🍽️</span><strong>Editar ementa</strong><small>Pratos, preços e fotografias</small></Link>
       </section>
 
