@@ -26,7 +26,8 @@ function DemoMap() {
       try {
         if (!(window as any).L) {
           await new Promise<void>((resolve, reject) => {
-            const css = document.querySelector('link[data-breizh-leaflet-css]'); if (!css) { const link = document.createElement("link"); link.rel = "stylesheet"; link.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"; link.dataset.breizhLeafletCss = "true"; document.head.appendChild(link); }\n            const old = document.querySelector('script[data-breizh-leaflet]');
+            const css = document.querySelector('link[data-breizh-leaflet-css]'); if (!css) { const link = document.createElement("link"); link.rel = "stylesheet"; link.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"; link.dataset.breizhLeafletCss = "true"; document.head.appendChild(link); }
+            const old = document.querySelector('script[data-breizh-leaflet]');
             if (old) { old.addEventListener("load", () => resolve(), { once: true }); old.addEventListener("error", () => reject(), { once: true }); return; }
             const s = document.createElement("script");
             s.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
