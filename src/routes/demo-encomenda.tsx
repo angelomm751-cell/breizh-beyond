@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, Check, Navigation, Bike } from "lucide-react";
+import { ArrowLeft, Check, Navigation, MapPin } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useCart } from "@/components/cart";
 import { formatPrice } from "@/lib/menu";
@@ -130,16 +130,10 @@ function DemoMap() {
           animate: false,
         });
 
-        const carHtml = `
-          <div class="breizh-delivery-bike" aria-label="Mota do estafeta">
-            <div class="breizh-bike-body"></div>
-            <div class="breizh-bike-wheel breizh-bike-wheel--front"></div>
-            <div class="breizh-bike-wheel breizh-bike-wheel--back"></div>
-            <div class="breizh-bike-light"></div>
-          </div>`;
+        const arrowHtml = `<div class="breizh-route-arrow" aria-label="Estafeta a caminho"></div>`;
 
         vehicle = L.marker(points[0], {
-          icon: markerIcon(carHtml, 62),
+          icon: markerIcon(arrowHtml, 44),
           zIndexOffset: 2500,
         }).addTo(map);
 
@@ -149,7 +143,16 @@ function DemoMap() {
           const elapsed = now % duration;
           const progress = elapsed / duration;
           const index = Math.min(points.length - 1, Math.floor(progress * (points.length - 1)));
+          const next = Math.min(points.length - 1, index + 1);
           vehicle.setLatLng(points[index]);
+          const a = points[index], b = points[next];
+          const angle = Math.atan2((b[1] - a[1]) * Math.cos(a[0] * Math.PI / 180), b[0] - a[0]) * 180 / Math.PI;
+          const el = vehicle.getElement()?.querySelector(".breizh-route-arrow") as HTMLElement | null;
+          if (el) el.style.transform = `rotate(${angle}deg)`;
+          if (progress > .985) {
+            el?.classList.add("is-arrived");
+            window.setTimeout(() => el?.classList.remove("is-arrived"), 2200);
+          }
           frame = requestAnimationFrame(move);
         };
 
@@ -193,7 +196,7 @@ function DemoMap() {
           <span>O mapa real volta a carregar quando a ligação estiver disponível.</span>
         </div>
       )}
-      <div className="demo-map-badge"><Bike size={14} /> Estafeta a caminho</div>
+      <div className="demo-map-badge"><MapPin size={14} /> BREIZH FOOD <span>→</span> DOMICÍLIO</div>
     </div>
   );
 }
