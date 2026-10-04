@@ -11,17 +11,23 @@ async function fetchMenu(): Promise<Product[]> {
     .eq("available", true)
     .order("sort_order");
 
-  // Only use the database when it contains the complete confirmed menu.
-  // If the database still has the old/demo menu, use the bundled menu instead.
-  const expectedIds = new Set(fallback.map((p) => p.id));
-  const databaseIds = new Set(Array.isArray(data) ? data.map((row) => row.id) : []);
-  const hasCompleteMenu =
-    !error &&
-    Array.isArray(data) &&
-    expectedIds.size > 0 &&
-    [...expectedIds].every((id) => databaseIds.has(id));
+  // The restaurant's confirmed menu in the repository is the source of truth.
+  // Do not let an older/incomplete Supabase menu silently replace it.
+  if (error || !Array.isArray(data)) return fallback;
 
-  if (!hasCompleteMenu) return fallback;
+  const expectedById = new Map(fallback.map((p) => [p.id, p]));
+  const matchesConfirmedMenu =
+    data.length === fallback.length &&
+    fallback.every((expected) => {
+      const row = data.find((item) => item.id === expected.id);
+      return !!row &&
+        row.name === expected.name &&
+        Number(row.price) === expected.price &&
+        row.category === expected.category &&
+        row.description === expected.description;
+    });
+
+  if (!matchesConfirmedMenu) return fallback;
 
   return data.map((row) => ({
     id: row.id,
@@ -34,7 +40,7 @@ async function fetchMenu(): Promise<Product[]> {
   }));
 }
 
-/** Live menu edited from /admin; falls back to the complete bundled menu. */
+/** Confirmed restaurant menu; uses Supabase only when it exactly matches it. */
 export function useMenu() {
   const { data } = useQuery({
     queryKey: menuQueryKey,
