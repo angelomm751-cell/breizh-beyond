@@ -67,6 +67,7 @@ export type Database = {
           notes: string | null
           number: number
           payment: string
+          payment_status?: string
           phone: string
           postal: string | null
           status: string
@@ -87,6 +88,7 @@ export type Database = {
           notes?: string | null
           number?: number
           payment: string
+          payment_status: string
           phone: string
           postal?: string | null
           status?: string
