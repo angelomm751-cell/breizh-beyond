@@ -17,6 +17,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CuisineRouteImport } from './routes/cuisine'
 import { Route as GalerieRouteImport } from './routes/galerie'
 import { Route as GestaoRouteImport } from './routes/gestao'
+import { Route as DemoEntregaRouteImport } from './routes/demo-entrega'
 import { Route as LaCarteRouteImport } from './routes/la-carte'
 import { Route as MerciRouteImport } from './routes/merci'
 import { Route as NotreHistoireRouteImport } from './routes/notre-histoire'
@@ -50,6 +51,11 @@ const ContactRoute = ContactRouteImport.update({
 const CuisineRoute = CuisineRouteImport.update({
   id: '/cuisine',
   path: '/cuisine',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoEntregaRoute = DemoEntregaRouteImport.update({
+  id: '/demo-entrega',
+  path: '/demo-entrega',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GestaoRoute = GestaoRouteImport.update({
@@ -92,6 +98,7 @@ export interface FileRoutesByFullPath {
   '/cuisine': typeof CuisineRoute
   '/galerie': typeof GalerieRoute
   '/gestao': typeof GestaoRoute
+  '/demo-entrega': typeof DemoEntregaRoute
   '/la-carte': typeof LaCarteRoute
   '/merci': typeof MerciRoute
   '/notre-histoire': typeof NotreHistoireRoute
@@ -106,6 +113,7 @@ export interface FileRoutesByTo {
   '/cuisine': typeof CuisineRoute
   '/galerie': typeof GalerieRoute
   '/gestao': typeof GestaoRoute
+  '/demo-entrega': typeof DemoEntregaRoute
   '/la-carte': typeof LaCarteRoute
   '/merci': typeof MerciRoute
   '/notre-histoire': typeof NotreHistoireRoute
@@ -137,6 +145,7 @@ export interface FileRouteTypes {
     | '/cuisine'
     | '/galerie'
     | '/gestao'
+    | '/demo-entrega'
     | '/la-carte'
     | '/merci'
     | '/notre-histoire'
@@ -283,6 +292,7 @@ const rootRouteChildren: RootRouteChildren = {
   CuisineRoute: CuisineRoute,
   GalerieRoute: GalerieRoute,
   GestaoRoute: GestaoRoute,
+  DemoEntregaRoute: DemoEntregaRoute,
   LaCarteRoute: LaCarteRoute,
   MerciRoute: MerciRoute,
   NotreHistoireRoute: NotreHistoireRoute,
