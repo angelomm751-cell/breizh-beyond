@@ -3,9 +3,8 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
   vite: {
-    // This project is deployed at the GitHub Pages subpath /breizh-beyond/.
-    // Keep the base explicit so CSS, JS and assets load correctly in production.
-    base: "/breizh-beyond/",
+    // GitHub Pages needs the repository subpath; Lovable preview must keep root-relative assets.
+    base: process.env.GITHUB_ACTIONS === "true" ? "/breizh-beyond/" : "/",
   },
   tanstackStart: {
     server: {
