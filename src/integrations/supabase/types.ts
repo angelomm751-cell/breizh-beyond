@@ -14,7 +14,108 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      menu_items: {
+        Row: {
+          available: boolean
+          category: string
+          created_at: string
+          description: string
+          id: string
+          image: string
+          name: string
+          position: string
+          price: number
+          sort_order: number
+        }
+        Insert: {
+          available?: boolean
+          category: string
+          created_at?: string
+          description?: string
+          id: string
+          image?: string
+          name: string
+          position?: string
+          price?: number
+          sort_order?: number
+        }
+        Update: {
+          available?: boolean
+          category?: string
+          created_at?: string
+          description?: string
+          id?: string
+          image?: string
+          name?: string
+          position?: string
+          price?: number
+          sort_order?: number
+        }
+        Relationships: []
+      }
+      orders: {
+        Row: {
+          address: string | null
+          city: string | null
+          created_at: string
+          customer_name: string
+          delivery: string
+          delivery_fee: number
+          email: string
+          id: string
+          items: Json
+          notes: string | null
+          number: number
+          payment: string
+          phone: string
+          postal: string | null
+          status: string
+          subtotal: number
+          total: number
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          city?: string | null
+          created_at?: string
+          customer_name: string
+          delivery: string
+          delivery_fee?: number
+          email: string
+          id?: string
+          items: Json
+          notes?: string | null
+          number?: number
+          payment: string
+          phone: string
+          postal?: string | null
+          status?: string
+          subtotal: number
+          total: number
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          city?: string | null
+          created_at?: string
+          customer_name?: string
+          delivery?: string
+          delivery_fee?: number
+          email?: string
+          id?: string
+          items?: Json
+          notes?: string | null
+          number?: number
+          payment?: string
+          phone?: string
+          postal?: string | null
+          status?: string
+          subtotal?: number
+          total?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

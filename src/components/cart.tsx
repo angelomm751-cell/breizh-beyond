@@ -2,7 +2,7 @@ import { createContext, useContext, useMemo, useState, type ReactNode } from "re
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Minus, Plus, ShoppingBag, X } from "lucide-react";
 import { Button } from "./button";
-import { formatPrice, products, type Product } from "@/lib/menu";
+import { formatPrice, type Product } from "@/lib/menu";
 
 type CartLine = { product: Product; quantity: number };
 type CartContextValue = {
@@ -20,26 +20,28 @@ type CartContextValue = {
 const CartContext = createContext<CartContextValue | undefined>(undefined);
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [quantities, setQuantities] = useState<Record<string, number>>({});
+  const [entries, setEntries] = useState<Record<string, CartLine>>({});
   const [isOpen, setOpen] = useState(false);
-  const lines = useMemo(() => products.filter((p) => quantities[p.id]).map((product) => ({ product, quantity: quantities[product.id] ?? 0 })), [quantities]);
+  const lines = useMemo(() => Object.values(entries), [entries]);
   const count = lines.reduce((sum, line) => sum + line.quantity, 0);
   const total = lines.reduce((sum, line) => sum + line.product.price * line.quantity, 0);
 
-  const change = (id: string, delta: number) => setQuantities((current) => {
-    const next = Math.max(0, (current[id] ?? 0) + delta);
+  const change = (id: string, delta: number, product?: Product) => setEntries((current) => {
+    const line = current[id] ?? (product ? { product, quantity: 0 } : undefined);
+    if (!line) return current;
+    const next = Math.max(0, line.quantity + delta);
     if (!next) {
       const { [id]: _removed, ...rest } = current;
       return rest;
     }
-    return { ...current, [id]: next };
+    return { ...current, [id]: { product: line.product, quantity: next } };
   });
   const add = (product: Product) => {
-    change(product.id, 1);
+    change(product.id, 1, product);
     setOpen(true);
   };
 
-  return <CartContext.Provider value={{ lines, count, total, isOpen, add, change, open: () => setOpen(true), close: () => setOpen(false), clear: () => setQuantities({}) }}>{children}</CartContext.Provider>;
+  return <CartContext.Provider value={{ lines, count, total, isOpen, add, change, open: () => setOpen(true), close: () => setOpen(false), clear: () => setEntries({}) }}>{children}</CartContext.Provider>;
 }
 
 export function useCart() {

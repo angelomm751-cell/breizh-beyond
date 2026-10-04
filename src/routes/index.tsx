@@ -1,3 +1,4 @@
+import { useMenu } from "@/hooks/use-menu";
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import { ArrowDown, ArrowRight } from "lucide-react";
@@ -7,7 +8,6 @@ import menuImage from "@/assets/breizh-menu.jpg";
 import maisonImage from "@/assets/breizh-maison.jpg";
 import { Reveal } from "@/components/reveal";
 import { ProductCard } from "@/components/product-card";
-import { products } from "@/lib/menu";
 
 // No head() here: the home route inherits title/description/og/twitter from
 // __root.tsx, and ships no og:image so serve-time hosting can inject the
@@ -26,6 +26,7 @@ export const Route = createFileRoute("/")({
 
 // IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
+  const products = useMenu();
   return (
     <>
       <section className="hero">

@@ -28,6 +28,17 @@ export const products: Product[] = [
   { id: "jus", name: "Sumo de maçã", category: "Boissons", description: "Sumo puro de maçã, de produção artesanal.", price: 4.5, image: heroImage, position: "18% center" },
 ];
 
+const localImages: Record<string, string> = { hero: heroImage, craft: craftImage, menu: menuImage, maison: maisonImage };
+export const localImageKeys = Object.keys(localImages);
+/** DB stores either "local:<key>" for bundled photos or a full image URL. */
+export const resolveImage = (value: string) => (value.startsWith("local:") ? localImages[value.slice(6)] ?? heroImage : value);
+export const categories: Category[] = ["Galettes", "Crêpes", "Spécialités", "Desserts", "Boissons"];
+
+/** Delivery fee rules (demo values — confirm with the restaurant). */
+export const DELIVERY_FEE = 4.5;
+export const FREE_DELIVERY_FROM = 35;
+export const deliveryFeeFor = (subtotal: number, mode: "home" | "pickup") => (mode === "pickup" || subtotal >= FREE_DELIVERY_FROM || subtotal === 0 ? 0 : DELIVERY_FEE);
+
 export const formatPrice = (value: number) => `${value.toFixed(2).replace(".", ",")} €`;
 
 export const galleryImages = [
