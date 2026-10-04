@@ -130,7 +130,7 @@ function DemoMap() {
           animate: false,
         });
 
-        const arrowHtml = `<div class="breizh-route-arrow" aria-label="Estafeta a caminho"></div>`;
+        const arrowHtml = `<div class="breizh-route-arrow" aria-label="Estafeta a caminho"><span></span></div>`;
 
         vehicle = L.marker(points[0], {
           icon: markerIcon(arrowHtml, 44),
@@ -139,12 +139,12 @@ function DemoMap() {
 
         const move = (now: number) => {
           if (stopped) return;
-          const duration = 11000;
+          const duration = 9000;
           const elapsed = now % duration;
           const progress = elapsed / duration;
-          const index = Math.min(points.length - 1, Math.floor(progress * (points.length - 1)));
+          const smooth = progress * (points.length - 1);\n          const index = Math.min(points.length - 2, Math.floor(smooth));\n          const local = smooth - index;
           const next = Math.min(points.length - 1, index + 1);
-          vehicle.setLatLng(points[index]);
+          const a = points[index], b = points[Math.min(points.length - 1, index + 1)];\n          const lat = a[0] + (b[0] - a[0]) * local;\n          const lng = a[1] + (b[1] - a[1]) * local;\n          vehicle.setLatLng([lat, lng]);
           const a = points[index], b = points[next];
           const angle = Math.atan2((b[1] - a[1]) * Math.cos(a[0] * Math.PI / 180), b[0] - a[0]) * 180 / Math.PI;
           const el = vehicle.getElement()?.querySelector(".breizh-route-arrow") as HTMLElement | null;
