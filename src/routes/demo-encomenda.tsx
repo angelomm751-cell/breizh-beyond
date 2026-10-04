@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { useCart } from "@/components/cart";
 import { formatPrice } from "@/lib/menu";
 
-const START: [number, number] = [41.5957, -8.7383];
-const DEST: [number, number] = [41.6050, -8.7386];
+const START: [number, number] = [41.61318, -8.740647];
+const DEST: [number, number] = [41.605277, -8.742535];
 
 export const Route = createFileRoute("/demo-encomenda")({
   head: () => ({ meta: [
@@ -22,60 +22,186 @@ function DemoMap() {
 
   useEffect(() => {
     let map: any, vehicle: any, frame = 0, stopped = false;
+
+    const loadLeaflet = async () => {
+      const css = document.querySelector('link[data-breizh-leaflet-css]') as HTMLLinkElement | null;
+      if (!css) {
+        await new Promise<void>((resolve, reject) => {
+          const link = document.createElement("link");
+          link.rel = "stylesheet";
+          link.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+          link.dataset.breizhLeafletCss = "true";
+          link.onload = () => resolve();
+          link.onerror = () => reject(new Error("leaflet-css"));
+          document.head.appendChild(link);
+        });
+      }
+
+      if (!(window as any).L) {
+        await new Promise<void>((resolve, reject) => {
+          const old = document.querySelector('script[data-breizh-leaflet]') as HTMLScriptElement | null;
+          if (old) {
+            old.addEventListener("load", () => resolve(), { once: true });
+            old.addEventListener("error", () => reject(new Error("leaflet-js")), { once: true });
+            return;
+          }
+          const script = document.createElement("script");
+          script.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+          script.dataset.breizhLeaflet = "true";
+          script.onload = () => resolve();
+          script.onerror = () => reject(new Error("leaflet-js"));
+          document.head.appendChild(script);
+        });
+      }
+    };
+
     const run = async () => {
       try {
-        if (!(window as any).L) {
-          await new Promise<void>((resolve, reject) => {
-            const css = document.querySelector('link[data-breizh-leaflet-css]'); if (!css) { const link = document.createElement("link"); link.rel = "stylesheet"; link.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"; link.dataset.breizhLeafletCss = "true"; document.head.appendChild(link); }
-            const old = document.querySelector('script[data-breizh-leaflet]');
-            if (old) { old.addEventListener("load", () => resolve(), { once: true }); old.addEventListener("error", () => reject(), { once: true }); return; }
-            const s = document.createElement("script");
-            s.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
-            s.dataset.breizhLeaflet = "true"; s.onload = () => resolve(); s.onerror = () => reject(); document.head.appendChild(s);
-          });
-        }
+        await loadLeaflet();
         if (stopped || !ref.current) return;
+
         const L = (window as any).L;
-        map = L.map(ref.current, { zoomControl: true }).setView(START, 15);
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: "&copy; OpenStreetMap contributors" }).addTo(map);
-        const icon = (html: string) => L.divIcon({ className: "breizh-map-icon", html, iconSize: [42, 42], iconAnchor: [21, 21] });
-        L.marker(START, { icon: icon('<div class="breizh-map-pin breizh-map-pin--shop">BF</div>') }).addTo(map).bindPopup("<b>BREIZH FOOD</b><br>Centro Comercial Duas Rosas");
-        L.marker(DEST, { icon: icon('<div class="breizh-map-pin breizh-map-pin--home">⌂</div>') }).addTo(map).bindPopup("<b>Destino</b><br>Morada de demonstração");
+        map = L.map(ref.current, {
+          zoomControl: true,
+          attributionControl: true,
+          scrollWheelZoom: false,
+        }).setView(START, 15);
+
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 19,
+          attribution: "&copy; OpenStreetMap contributors",
+        }).addTo(map);
+
+        const markerIcon = (html: string, size = 48) =>
+          L.divIcon({
+            className: "breizh-map-icon",
+            html,
+            iconSize: [size, size],
+            iconAnchor: [size / 2, size / 2],
+          });
+
+        const shop = L.marker(START, {
+          icon: markerIcon('<div class="breizh-map-pin breizh-map-pin--shop"><span>BF</span></div>'),
+          zIndexOffset: 1200,
+        }).addTo(map);
+
+        shop.bindTooltip("BREIZH FOOD", {
+          permanent: true,
+          direction: "top",
+          offset: [0, -25],
+          className: "breizh-map-label",
+        });
+
+        const home = L.marker(DEST, {
+          icon: markerIcon('<div class="breizh-map-pin breizh-map-pin--home"><span>⌂</span></div>'),
+          zIndexOffset: 1100,
+        }).addTo(map);
+
+        home.bindTooltip("DOMICÍLIO", {
+          permanent: true,
+          direction: "top",
+          offset: [0, -25],
+          className: "breizh-map-label",
+        });
+
         const url = `https://router.project-osrm.org/route/v1/driving/${START[1]},${START[0]};${DEST[1]},${DEST[0]}?overview=full&geometries=geojson`;
         const res = await fetch(url);
         if (!res.ok) throw new Error("route");
+
         const json = await res.json();
-        const points = json.routes?.[0]?.geometry?.coordinates?.map((p: [number, number]) => [p[1], p[0]]) ?? [];
+        const points =
+          json.routes?.[0]?.geometry?.coordinates?.map((p: [number, number]) => [p[1], p[0]]) ?? [];
+
         if (!points.length || stopped) throw new Error("route");
-        const line = L.polyline(points, { color: "#b69a63", weight: 6, opacity: .9 }).addTo(map);
-        map.fitBounds(line.getBounds(), { padding: [35, 35] });
-        vehicle = L.marker(points[0], { icon: icon('<div class="breizh-map-bike">🏍️</div>'), zIndexOffset: 1000 }).addTo(map);
-        let start = performance.now();
-        const duration = 12000;
-        const animate = (now: number) => {
+
+        const line = L.polyline(points, {
+          color: "#b69a63",
+          weight: 6,
+          opacity: 0.9,
+          lineCap: "round",
+          lineJoin: "round",
+        }).addTo(map);
+
+        const bounds = line.getBounds().extend(START).extend(DEST);
+        map.fitBounds(bounds, {
+          paddingTopLeft: [55, 70],
+          paddingBottomRight: [55, 70],
+          maxZoom: 16,
+          animate: false,
+        });
+
+        const carHtml = `
+          <div class="breizh-delivery-bike" aria-label="Mota do estafeta">
+            <div class="breizh-bike-body"></div>
+            <div class="breizh-bike-wheel breizh-bike-wheel--front"></div>
+            <div class="breizh-bike-wheel breizh-bike-wheel--back"></div>
+            <div class="breizh-bike-light"></div>
+          </div>`;
+
+        vehicle = L.marker(points[0], {
+          icon: markerIcon(carHtml, 62),
+          zIndexOffset: 2500,
+        }).addTo(map);
+
+        const move = (now: number) => {
           if (stopped) return;
-          let p = (now - start) / duration;
-          if (p >= 1) { start = now; p = 0; }
-          vehicle.setLatLng(points[Math.min(points.length - 1, Math.floor(p * (points.length - 1)))]);
-          frame = requestAnimationFrame(animate);
+          const duration = 11000;
+          const elapsed = now % duration;
+          const progress = elapsed / duration;
+          const index = Math.min(points.length - 1, Math.floor(progress * (points.length - 1)));
+          vehicle.setLatLng(points[index]);
+          frame = requestAnimationFrame(move);
         };
-        frame = requestAnimationFrame(animate);
-      } catch { if (!stopped) setError(true); }
+
+        frame = requestAnimationFrame(move);
+
+        const refresh = () => {
+          if (!stopped && map) {
+            map.invalidateSize(true);
+            map.fitBounds(bounds, {
+              paddingTopLeft: [55, 70],
+              paddingBottomRight: [55, 70],
+              maxZoom: 16,
+              animate: false,
+            });
+          }
+        };
+
+        window.setTimeout(refresh, 100);
+        window.setTimeout(refresh, 500);
+      } catch {
+        if (!stopped) setError(true);
+      }
     };
+
     run();
-    return () => { stopped = true; cancelAnimationFrame(frame); if (map) map.remove(); };
+
+    return () => {
+      stopped = true;
+      cancelAnimationFrame(frame);
+      if (map) map.remove();
+    };
   }, []);
 
-  return <div className="demo-real-map-wrap">
-    <div ref={ref} className="demo-real-map" />
-    {error && <div className="demo-map-fallback"><Navigation size={22} /><strong>Mapa temporariamente indisponível</strong><span>O mapa real volta a carregar quando a ligação estiver disponível.</span></div>}
-    <div className="demo-map-badge"><Bike size={14} /> Estafeta a caminho</div>
-  </div>;
+  return (
+    <div className="demo-real-map-wrap">
+      <div ref={ref} className="demo-real-map" />
+      {error && (
+        <div className="demo-map-fallback">
+          <Navigation size={22} />
+          <strong>Mapa temporariamente indisponível</strong>
+          <span>O mapa real volta a carregar quando a ligação estiver disponível.</span>
+        </div>
+      )}
+      <div className="demo-map-badge"><Bike size={14} /> Estafeta a caminho</div>
+    </div>
+  );
 }
 
 function DemoEncomenda() {
   const [started, setStarted] = useState(false);
   const { lines, total } = useCart();
+
   return <main className="demo-order-page">
     <Link to="/commander" className="text-link"><ArrowLeft size={14} /> Voltar à encomenda</Link>
     {!started ? <section className="demo-order-panel">
