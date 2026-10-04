@@ -89,7 +89,7 @@ export function CartDrawer() {
           ))}
         </div>
         <div className="cart-total"><span>Total</span><strong>{formatPrice(total)}</strong></div>
-        {lines.length > 0 && <Link to="/checkout" onClick={close} className="brand-link brand-link--gold">Finalizar encomenda <ArrowRight size={16} /></Link>}
+        {lines.length > 0 && <Link to="/demo-encomenda" onClick={close} className="brand-link brand-link--gold">Finalizar encomenda <ArrowRight size={16} /></Link>}
         <p className="demo-note">Encomenda de demonstração · pagamento não ativado</p>
       </aside>
     </div>
