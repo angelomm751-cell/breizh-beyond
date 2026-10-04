@@ -142,9 +142,14 @@ function DemoMap() {
           const duration = 9000;
           const elapsed = now % duration;
           const progress = elapsed / duration;
-          const smooth = progress * (points.length - 1);\n          const index = Math.min(points.length - 2, Math.floor(smooth));\n          const local = smooth - index;
+          const smooth = progress * (points.length - 1);
+          const index = Math.min(points.length - 2, Math.floor(smooth));
+          const local = smooth - index;
           const next = Math.min(points.length - 1, index + 1);
-          const a = points[index], b = points[Math.min(points.length - 1, index + 1)];\n          const lat = a[0] + (b[0] - a[0]) * local;\n          const lng = a[1] + (b[1] - a[1]) * local;\n          vehicle.setLatLng([lat, lng]);
+          const a = points[index], b = points[Math.min(points.length - 1, index + 1)];
+          const lat = a[0] + (b[0] - a[0]) * local;
+          const lng = a[1] + (b[1] - a[1]) * local;
+          vehicle.setLatLng([lat, lng]);
           const a = points[index], b = points[next];
           const angle = Math.atan2((b[1] - a[1]) * Math.cos(a[0] * Math.PI / 180), b[0] - a[0]) * 180 / Math.PI;
           const el = vehicle.getElement()?.querySelector(".breizh-route-arrow") as HTMLElement | null;
