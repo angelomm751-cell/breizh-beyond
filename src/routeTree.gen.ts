@@ -16,6 +16,7 @@ import { Route as CommanderRouteImport } from './routes/commander'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CuisineRouteImport } from './routes/cuisine'
 import { Route as GalerieRouteImport } from './routes/galerie'
+import { Route as GestaoRouteImport } from './routes/gestao'
 import { Route as LaCarteRouteImport } from './routes/la-carte'
 import { Route as MerciRouteImport } from './routes/merci'
 import { Route as NotreHistoireRouteImport } from './routes/notre-histoire'
@@ -49,6 +50,11 @@ const ContactRoute = ContactRouteImport.update({
 const CuisineRoute = CuisineRouteImport.update({
   id: '/cuisine',
   path: '/cuisine',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GestaoRoute = GestaoRouteImport.update({
+  id: '/gestao',
+  path: '/gestao',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GalerieRoute = GalerieRouteImport.update({
@@ -85,6 +91,8 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/cuisine': typeof CuisineRoute
   '/galerie': typeof GalerieRoute
+  '/gestao': typeof GestaoRoute
+  '/gestao': typeof GestaoRoute
   '/la-carte': typeof LaCarteRoute
   '/merci': typeof MerciRoute
   '/notre-histoire': typeof NotreHistoireRoute
@@ -217,6 +225,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CuisineRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/gestao': {
+      id: '/gestao'
+      path: '/gestao'
+      fullPath: '/gestao'
+      preLoaderRoute: typeof GestaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/galerie': {
       id: '/galerie'
       path: '/galerie'
@@ -263,6 +278,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   CuisineRoute: CuisineRoute,
   GalerieRoute: GalerieRoute,
+  GestaoRoute: GestaoRoute,
   LaCarteRoute: LaCarteRoute,
   MerciRoute: MerciRoute,
   NotreHistoireRoute: NotreHistoireRoute,
