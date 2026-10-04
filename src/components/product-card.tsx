@@ -17,7 +17,7 @@ export function ProductCard({ product, index, menuProduct }: { product: Product;
   const { add } = useCart();
   const [choice, setChoice] = useState<{ product: Product; toppings: string[]; sauce: string } | null>(null);
 
-  const needsToppings = product.category === "Desserts" && product.name.startsWith("Mini Pancakes");
+  const needsToppings = product.category === "Mini Pancakes" && product.name.startsWith("Mini Pancakes");
 
   const choose = (selected: Product) => {
     setChoice({ product: selected, toppings: [], sauce: selected.category === "Mini Pancakes" ? "Nutella®" : "" });
