@@ -35,9 +35,12 @@ export const createOrder = createServerFn({ method: "POST" })
     const db = await admin();
     const { data: menu, error } = await db.from("menu_items").select("id,name,price").in("id", data.items.map((i) => i.id)).eq("available", true);
     if (error) throw new Error("Não foi possível validar a ementa.");
+    const fallbackItems = (await import("./menu")).products;
     const items = data.items.flatMap((i) => {
       const m = menu?.find((x) => x.id === i.id);
-      return m ? [{ id: m.id, name: m.name, price: Number(m.price), quantity: i.quantity }] : [];
+      if (m) return [{ id: m.id, name: m.name, price: Number(m.price), quantity: i.quantity }];
+      const f = fallbackItems.find((x) => x.id === i.id);
+      return f ? [{ id: f.id, name: f.name, price: f.price, quantity: i.quantity }] : [];
     });
     if (!items.length) throw new Error("Produtos indisponíveis.");
     const subtotal = items.reduce((s, i) => s + i.price * i.quantity, 0);
