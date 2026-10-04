@@ -55,9 +55,9 @@ export function SiteShell({ children }: { children: ReactNode }) {
         <div className="footer-mark"><span>BREIZH</span><em>FOOD</em><p>Da Bretanha a Portugal</p></div>
         <div className="footer-grid">
           <div><span className="eyebrow">La maison</span><Link to="/notre-histoire">A nossa história</Link><Link to="/la-carte">A ementa</Link><Link to="/galerie">Galeria</Link></div>
-          <div><span className="eyebrow">Où nous sommes</span><p>Morada à confirmar<br />Portugal</p><Link to="/contact">Contacto & horários</Link></div>
+          <div><span className="eyebrow">Où nous sommes</span><p>Centro Comercial Duas Rosas<br />Av. de Santa Marinha, Forjães<br />4740-438 Esposende</p><a href="https://www.google.com/maps/search/?api=1&query=Centro+Comercial+Duas+Rosas%2C+Forj%C3%A3es%2C+Esposende" target="_blank" rel="noreferrer">Ver localização</a><Link to="/contact">Contacto & horários</Link></div>
           <div><span className="eyebrow">À votre table</span><Link to="/commander">Encomendar para casa</Link><a href="mailto:bonjour@breizhfood.pt">bonjour@breizhfood.pt</a></div>
-          <a href="https://instagram.com" aria-label="Instagram" className="footer-social"><Instagram /><span>Instagram</span></a>
+          <a href="https://www.instagram.com/breizh_food22?stkn=Y3ZpM3JyOTJrZnI5" target="_blank" rel="noreferrer" aria-label="Instagram BREIZH FOOD" className="footer-social"><Instagram /><span>Instagram</span></a>
         </div>
         <div className="footer-bottom"><span>© 2026 BREIZH FOOD</span><span>Informações de demonstração a substituir antes da publicação</span></div>
       </footer>
