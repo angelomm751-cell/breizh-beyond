@@ -15,17 +15,28 @@ export type Product = {
   position: string;
 };
 
+// Ementa recebida pelo restaurante. Os preços "Só" e "Menu" são produtos separados
+// para manter o carrinho e o checkout com preços corretos.
 export const products: Product[] = [
-  { id: "complete", name: "La Complète", category: "Galettes", description: "Presunto fumado, ovo caseiro, comté curado e manteiga salgada.", price: 14.5, image: heroImage, position: "center" },
-  { id: "foret", name: "La Forêt", category: "Galettes", description: "Cogumelos assados, creme de comté, tomilho fresco e salada.", price: 15.5, image: menuImage, position: "73% center" },
-  { id: "armor", name: "L’Armor", category: "Spécialités", description: "Salmão, alho-francês, creme de limão e endro.", price: 17.5, image: craftImage, position: "center" },
-  { id: "caramel", name: "Caramelo com manteiga salgada", category: "Crêpes", description: "Caramelo caseiro com manteiga salgada, com um toque francês.", price: 9.5, image: menuImage, position: "17% center" },
-  { id: "citron", name: "Limão & Açúcar", category: "Crêpes", description: "Limão fresco, açúcar e manteiga noisette.", price: 7.5, image: menuImage, position: "48% 76%" },
-  { id: "far", name: "Far Breton", category: "Desserts", description: "Ameixas, baunilha e creme ligeiramente batido.", price: 8, image: maisonImage, position: "69% center" },
-  { id: "mini-pancakes", name: "Mini pancakes", category: "Desserts", description: "Pequenos, fofos e perfeitos para partilhar — feitos na hora.", price: 5, image: "https://images.unsplash.com/photo-1776073975852-435302bbbe7a?auto=format&fit=crop&w=1200&q=85", position: "center" },
-  { id: "algodao-doce", name: "Algodão doce", category: "Desserts", description: "Leve, divertido e perfeito para festas e eventos.", price: 4, image: "https://images.unsplash.com/photo-1693122070191-277d7274cf46?auto=format&fit=crop&w=1200&q=85", position: "center" },
-  { id: "cidre", name: "Cidre Brut", category: "Boissons", description: "Sidra artesanal bretã, fresca e delicadamente frutada.", price: 5.5, image: maisonImage, position: "center" },
-  { id: "jus", name: "Sumo de maçã", category: "Boissons", description: "Sumo puro de maçã, de produção artesanal.", price: 4.5, image: heroImage, position: "18% center" },
+  { id: "galette-complete-solo", name: "Galette Complète · Só", category: "Galettes", description: "Fiambre, Gruyère ralado e ovo.", price: 6, image: heroImage, position: "center" },
+  { id: "galette-complete-menu", name: "Galette Complète · Menu", category: "Galettes", description: "Fiambre, Gruyère ralado e ovo. Menu com acompanhamento, bebida 33 cl e molho.", price: 9, image: heroImage, position: "center" },
+  { id: "galette-chevre-solo", name: "Galette Cabra e Mel · Só", category: "Galettes", description: "Queijo de cabra, mel, fiambre, nozes e Gruyère ralado.", price: 6.5, image: menuImage, position: "center" },
+  { id: "galette-chevre-menu", name: "Galette Cabra e Mel · Menu", category: "Galettes", description: "Queijo de cabra, mel, fiambre, nozes e Gruyère ralado. Menu com acompanhamento, bebida 33 cl e molho.", price: 9.5, image: menuImage, position: "center" },
+  { id: "galette-raclette-solo", name: "Galette Raclette · Só", category: "Galettes", description: "Queijo raclette, fiambre, batata e Gruyère ralado.", price: 7.5, image: craftImage, position: "center" },
+  { id: "galette-raclette-menu", name: "Galette Raclette · Menu", category: "Galettes", description: "Queijo raclette, fiambre, batata e Gruyère ralado. Menu com acompanhamento, bebida 33 cl e molho.", price: 10, image: craftImage, position: "center" },
+
+  { id: "burger-classico-solo", name: "Burger Clássico · Só", category: "Spécialités", description: "Bife, cheddar, alface e cebola frita.", price: 6, image: heroImage, position: "center" },
+  { id: "burger-classico-menu", name: "Burger Clássico · Menu", category: "Spécialités", description: "Bife, cheddar, alface e cebola frita. Menu com batatas fritas caseiras, bebida 33 cl e molho.", price: 9, image: heroImage, position: "center" },
+  { id: "burger-frango-solo", name: "Burger Frango Frito · Só", category: "Spécialités", description: "Frango panado, cheddar, alface e cebola frita.", price: 6, image: craftImage, position: "center" },
+  { id: "burger-frango-menu", name: "Burger Frango Frito · Menu", category: "Spécialités", description: "Frango panado, cheddar, alface e cebola frita. Menu com batatas fritas caseiras, bebida 33 cl e molho.", price: 9, image: craftImage, position: "center" },
+  { id: "burger-raclette-solo", name: "Burger Raclette · Só", category: "Spécialités", description: "Bife, queijo raclette, bacon, alface e cebola frita.", price: 7.5, image: menuImage, position: "center" },
+  { id: "burger-raclette-menu", name: "Burger Raclette · Menu", category: "Spécialités", description: "Bife, queijo raclette, bacon, alface e cebola frita. Menu com batatas fritas caseiras, bebida 33 cl e molho.", price: 10, image: menuImage, position: "center" },
+  { id: "king-burger-solo", name: "King Burger · Só", category: "Spécialités", description: "2 bifes, 2 cheddars, 2 bacons, ovo, galeta de batata, alface e cebola frita.", price: 9.5, image: maisonImage, position: "center" },
+  { id: "king-burger-menu", name: "King Burger · Menu", category: "Spécialités", description: "2 bifes, 2 cheddars, 2 bacons, ovo, galeta de batata, alface e cebola frita. Menu com batatas fritas caseiras, bebida 33 cl e molho.", price: 13, image: maisonImage, position: "center" },
+
+  { id: "mini-pancakes-small", name: "Mini Pancakes · Pequeno", category: "Desserts", description: "10 mini pancakes, 1 molho e 2 toppings incluídos.", price: 5, image: menuImage, position: "center" },
+  { id: "mini-pancakes-medium", name: "Mini Pancakes · Médio", category: "Desserts", description: "15 mini pancakes, 1 molho e 2 toppings incluídos.", price: 7, image: menuImage, position: "center" },
+  { id: "mini-pancakes-large", name: "Mini Pancakes · Grande", category: "Desserts", description: "20 mini pancakes, 1 molho e 2 toppings incluídos.", price: 9, image: menuImage, position: "center" },
 ];
 
 const localImages: Record<string, string> = { hero: heroImage, craft: craftImage, menu: menuImage, maison: maisonImage };
@@ -42,8 +53,8 @@ export const deliveryFeeFor = (subtotal: number, mode: "home" | "pickup") => (mo
 export const formatPrice = (value: number) => `${value.toFixed(2).replace(".", ",")} €`;
 
 export const galleryImages = [
-  { src: heroImage, alt: "Galette bretonne servie sur une table en noyer", shape: "wide" },
-  { src: craftImage, alt: "Artisan préparant une galette sur le billig", shape: "tall" },
-  { src: menuImage, alt: "Sélection de crêpes et galettes artisanales", shape: "square" },
-  { src: maisonImage, alt: "Table élégante dans une maison contemporaine", shape: "wide" },
+  { src: heroImage, alt: "Galette bretonne servida numa mesa", shape: "wide" },
+  { src: craftImage, alt: "Preparação artesanal", shape: "tall" },
+  { src: menuImage, alt: "Seleção BREIZH FOOD", shape: "square" },
+  { src: maisonImage, alt: "Ambiente BREIZH FOOD", shape: "wide" },
 ];
