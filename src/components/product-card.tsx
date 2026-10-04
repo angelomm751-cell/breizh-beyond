@@ -53,7 +53,7 @@ export function ProductCard({
             ...current,
             product: selected,
             toppings: [],
-            sauce: isPancake ? "Nutella®" : "",
+            sauces: isPancake ? ["Nutella®"] : [],
           }
         : current
     );
