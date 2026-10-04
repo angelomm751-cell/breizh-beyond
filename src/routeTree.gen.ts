@@ -10,17 +10,25 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CommanderRouteImport } from './routes/commander'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CuisineRouteImport } from './routes/cuisine'
 import { Route as GalerieRouteImport } from './routes/galerie'
 import { Route as LaCarteRouteImport } from './routes/la-carte'
 import { Route as MerciRouteImport } from './routes/merci'
 import { Route as NotreHistoireRouteImport } from './routes/notre-histoire'
+import { Route as SuiviIdRouteImport } from './routes/suivi.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CheckoutRoute = CheckoutRouteImport.update({
@@ -36,6 +44,11 @@ const CommanderRoute = CommanderRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CuisineRoute = CuisineRouteImport.update({
+  id: '/cuisine',
+  path: '/cuisine',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GalerieRoute = GalerieRouteImport.update({
@@ -58,80 +71,106 @@ const NotreHistoireRoute = NotreHistoireRouteImport.update({
   path: '/notre-histoire',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SuiviIdRoute = SuiviIdRouteImport.update({
+  id: '/suivi/$id',
+  path: '/suivi/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/checkout': typeof CheckoutRoute
   '/commander': typeof CommanderRoute
   '/contact': typeof ContactRoute
+  '/cuisine': typeof CuisineRoute
   '/galerie': typeof GalerieRoute
   '/la-carte': typeof LaCarteRoute
   '/merci': typeof MerciRoute
   '/notre-histoire': typeof NotreHistoireRoute
+  '/suivi/$id': typeof SuiviIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/checkout': typeof CheckoutRoute
   '/commander': typeof CommanderRoute
   '/contact': typeof ContactRoute
+  '/cuisine': typeof CuisineRoute
   '/galerie': typeof GalerieRoute
   '/la-carte': typeof LaCarteRoute
   '/merci': typeof MerciRoute
   '/notre-histoire': typeof NotreHistoireRoute
+  '/suivi/$id': typeof SuiviIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/checkout': typeof CheckoutRoute
   '/commander': typeof CommanderRoute
   '/contact': typeof ContactRoute
+  '/cuisine': typeof CuisineRoute
   '/galerie': typeof GalerieRoute
   '/la-carte': typeof LaCarteRoute
   '/merci': typeof MerciRoute
   '/notre-histoire': typeof NotreHistoireRoute
+  '/suivi/$id': typeof SuiviIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/checkout'
     | '/commander'
     | '/contact'
+    | '/cuisine'
     | '/galerie'
     | '/la-carte'
     | '/merci'
     | '/notre-histoire'
+    | '/suivi/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin'
     | '/checkout'
     | '/commander'
     | '/contact'
+    | '/cuisine'
     | '/galerie'
     | '/la-carte'
     | '/merci'
     | '/notre-histoire'
+    | '/suivi/$id'
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/checkout'
     | '/commander'
     | '/contact'
+    | '/cuisine'
     | '/galerie'
     | '/la-carte'
     | '/merci'
     | '/notre-histoire'
+    | '/suivi/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
   CheckoutRoute: typeof CheckoutRoute
   CommanderRoute: typeof CommanderRoute
   ContactRoute: typeof ContactRoute
+  CuisineRoute: typeof CuisineRoute
   GalerieRoute: typeof GalerieRoute
   LaCarteRoute: typeof LaCarteRoute
   MerciRoute: typeof MerciRoute
   NotreHistoireRoute: typeof NotreHistoireRoute
+  SuiviIdRoute: typeof SuiviIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -141,6 +180,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/checkout': {
@@ -162,6 +208,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cuisine': {
+      id: '/cuisine'
+      path: '/cuisine'
+      fullPath: '/cuisine'
+      preLoaderRoute: typeof CuisineRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/galerie': {
@@ -192,18 +245,28 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NotreHistoireRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/suivi/$id': {
+      id: '/suivi/$id'
+      path: '/suivi/$id'
+      fullPath: '/suivi/$id'
+      preLoaderRoute: typeof SuiviIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
   CheckoutRoute: CheckoutRoute,
   CommanderRoute: CommanderRoute,
   ContactRoute: ContactRoute,
+  CuisineRoute: CuisineRoute,
   GalerieRoute: GalerieRoute,
   LaCarteRoute: LaCarteRoute,
   MerciRoute: MerciRoute,
   NotreHistoireRoute: NotreHistoireRoute,
+  SuiviIdRoute: SuiviIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
