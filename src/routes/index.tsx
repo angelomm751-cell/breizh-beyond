@@ -26,6 +26,7 @@ export const Route = createFileRoute("/")({
 
 // IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
+  const products = useMenu();
   return (
     <>
       <section className="hero">
