@@ -8,9 +8,7 @@ export type Product = { id: string; name: string; category: Category; descriptio
 
 // Ementa pública BREIZH FOOD — fluxo de seleção Só/Menu e personalização no carrinho.
 export const products: Product[] = [
-{ id: "mini-pancakes-small", name: "Mini Pancakes · Pequeno", category: "Mini Pancakes", description: "10 mini pancakes · 1 molho + 2 toppings incluídos. Extras: Chantilly +1€ ou Bola de gelado (baunilha) +1€.", price: 5, image: menuImage, position: "center" },
-{ id: "mini-pancakes-medium", name: "Mini Pancakes · Médio", category: "Mini Pancakes", description: "15 mini pancakes · 1 molho + 2 toppings incluídos. Extras: Chantilly +1€ ou Bola de gelado (baunilha) +1€.", price: 7, image: menuImage, position: "center" },
-{ id: "mini-pancakes-large", name: "Mini Pancakes · Grande", category: "Mini Pancakes", description: "20 mini pancakes · 1 molho + 2 toppings incluídos. Extras: Chantilly +1€ ou Bola de gelado (baunilha) +1€.", price: 9, image: menuImage, position: "center" },
+{ id: "mini-pancakes", name: "Mini Pancakes", category: "Mini Pancakes", description: "Pequenos pancakes, grandes momentos! Escolhe Pequeno, Médio ou Grande. 1 molho + 2 toppings incluídos.", price: 5, image: menuImage, position: "center" },
 { id: "galette-complete-solo", name: "Galette Complète · Só", category: "Galettes", description: "Fiambre, Gruyère ralado e ovo.", price: 6, image: heroImage, position: "center" },
 { id: "galette-complete-menu", name: "Galette Complète · Menu", category: "Galettes", description: "Fiambre, Gruyère ralado e ovo. Menu com batatas fritas caseiras, pequena salada, bebida 33cl e molhos: Molho Burger, Ketchup, Maionese ou Mostarda.", price: 9, image: heroImage, position: "center" },
 { id: "galette-chevre-solo", name: "Galette Cabra e Mel · Só", category: "Galettes", description: "Queijo de cabra, mel, fiambre, nozes e Gruyère ralado.", price: 6.5, image: menuImage, position: "center" },
