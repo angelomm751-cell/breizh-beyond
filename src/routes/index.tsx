@@ -67,13 +67,9 @@ function Index() {
       </section>
 
       <section className="menu-preview">
-        <Reveal className="section-heading"><span className="eyebrow">02 · La carte</span><h2>Clássicos,<br /><em>à notre manière.</em></h2><Link to="/la-carte" className="text-link">Ver toda a ementa <ArrowRight size={16} /></Link></Reveal>
-        <div className="product-grid">{pairedProducts.slice(0, 3).map(({ product, menuProduct }, index) => <ProductCard product={product} menuProduct={menuProduct} index={index} key={product.id} />)}</div>
-      </section>
-
-      <section className="menu-preview boutique-preview">
-        <Reveal className="section-heading"><span className="eyebrow">03 · La boutique</span><h2>Os nossos favoritos,<br /><em>pour savourer em Portugal.</em></h2><p>Crepes, mini pancakes e algodão doce — <em>une petite touche de Bretagne</em>, feita na hora.</p><Link to="/commander" className="text-link">Ver produtos e encomendar <ArrowRight size={16} /></Link></Reveal>
-        <div className="product-grid">{pairedProducts.slice(3, 5).map(({ product, menuProduct }, index) => <ProductCard product={product} menuProduct={menuProduct} index={index} key={product.id} />)}</div>
+        <Reveal className="section-heading"><span className="eyebrow">02 · La carte</span><h2>A ementa completa,<br /><em>à votre manière.</em></h2><p>Escolhe o produto e usa o <strong>+</strong> para escolher Só ou Menu e personalizar o teu pedido.</p></Reveal>
+        <div className="product-grid">{pairedProducts.map(({ product, menuProduct }, index) => <ProductCard product={product} menuProduct={menuProduct} index={index} key={product.id} />)}</div>
+        <Reveal className="section-heading"><Link to="/commander" className="text-link">Encomendar e ver o carrinho <ArrowRight size={16} /></Link></Reveal>
       </section>
 
       <section className="wood-section">
