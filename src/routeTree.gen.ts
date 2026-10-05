@@ -13,9 +13,9 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CommanderRouteImport } from './routes/commander'
-import { Route as DemoEncomendaRouteImport } from './routes/demo-encomenda'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CuisineRouteImport } from './routes/cuisine'
+import { Route as DemoEncomendaRouteImport } from './routes/demo-encomenda'
 import { Route as GalerieRouteImport } from './routes/galerie'
 import { Route as LaCarteRouteImport } from './routes/la-carte'
 import { Route as MerciRouteImport } from './routes/merci'
@@ -42,11 +42,6 @@ const CommanderRoute = CommanderRouteImport.update({
   path: '/commander',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DemoEncomendaRoute = DemoEncomendaRouteImport.update({
-  id: '/demo-encomenda',
-  path: '/demo-encomenda',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -55,6 +50,11 @@ const ContactRoute = ContactRouteImport.update({
 const CuisineRoute = CuisineRouteImport.update({
   id: '/cuisine',
   path: '/cuisine',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoEncomendaRoute = DemoEncomendaRouteImport.update({
+  id: '/demo-encomenda',
+  path: '/demo-encomenda',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GalerieRoute = GalerieRouteImport.update({
@@ -89,8 +89,8 @@ export interface FileRoutesByFullPath {
   '/checkout': typeof CheckoutRoute
   '/commander': typeof CommanderRoute
   '/contact': typeof ContactRoute
-  '/demo-encomenda': typeof DemoEncomendaRoute
   '/cuisine': typeof CuisineRoute
+  '/demo-encomenda': typeof DemoEncomendaRoute
   '/galerie': typeof GalerieRoute
   '/la-carte': typeof LaCarteRoute
   '/merci': typeof MerciRoute
@@ -104,6 +104,7 @@ export interface FileRoutesByTo {
   '/commander': typeof CommanderRoute
   '/contact': typeof ContactRoute
   '/cuisine': typeof CuisineRoute
+  '/demo-encomenda': typeof DemoEncomendaRoute
   '/galerie': typeof GalerieRoute
   '/la-carte': typeof LaCarteRoute
   '/merci': typeof MerciRoute
@@ -118,6 +119,7 @@ export interface FileRoutesById {
   '/commander': typeof CommanderRoute
   '/contact': typeof ContactRoute
   '/cuisine': typeof CuisineRoute
+  '/demo-encomenda': typeof DemoEncomendaRoute
   '/galerie': typeof GalerieRoute
   '/la-carte': typeof LaCarteRoute
   '/merci': typeof MerciRoute
@@ -132,8 +134,8 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/commander'
     | '/contact'
-    | '/demo-encomenda'
     | '/cuisine'
+    | '/demo-encomenda'
     | '/galerie'
     | '/la-carte'
     | '/merci'
@@ -147,6 +149,7 @@ export interface FileRouteTypes {
     | '/commander'
     | '/contact'
     | '/cuisine'
+    | '/demo-encomenda'
     | '/galerie'
     | '/la-carte'
     | '/merci'
@@ -160,6 +163,7 @@ export interface FileRouteTypes {
     | '/commander'
     | '/contact'
     | '/cuisine'
+    | '/demo-encomenda'
     | '/galerie'
     | '/la-carte'
     | '/merci'
@@ -174,6 +178,7 @@ export interface RootRouteChildren {
   CommanderRoute: typeof CommanderRoute
   ContactRoute: typeof ContactRoute
   CuisineRoute: typeof CuisineRoute
+  DemoEncomendaRoute: typeof DemoEncomendaRoute
   GalerieRoute: typeof GalerieRoute
   LaCarteRoute: typeof LaCarteRoute
   MerciRoute: typeof MerciRoute
@@ -225,6 +230,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CuisineRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/demo-encomenda': {
+      id: '/demo-encomenda'
+      path: '/demo-encomenda'
+      fullPath: '/demo-encomenda'
+      preLoaderRoute: typeof DemoEncomendaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/galerie': {
       id: '/galerie'
       path: '/galerie'
@@ -269,8 +281,8 @@ const rootRouteChildren: RootRouteChildren = {
   CheckoutRoute: CheckoutRoute,
   CommanderRoute: CommanderRoute,
   ContactRoute: ContactRoute,
-  DemoEncomendaRoute: DemoEncomendaRoute,
   CuisineRoute: CuisineRoute,
+  DemoEncomendaRoute: DemoEncomendaRoute,
   GalerieRoute: GalerieRoute,
   LaCarteRoute: LaCarteRoute,
   MerciRoute: MerciRoute,
