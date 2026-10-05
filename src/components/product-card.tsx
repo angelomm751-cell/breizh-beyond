@@ -4,13 +4,15 @@ import { Button } from "./button";
 import { useCart } from "./cart";
 import { formatPrice, type Product } from "@/lib/menu";
 
-const pancakeToppings = [
-  "Chantilly", "Morangos", "Bananas", "Framboesas", "Chocolate negro",
-  "Chocolate branco", "Lotus", "Oreo", "Caramelo salgado triturado",
-  "Pistache", "Coulis de frutos vermelhos", "Smarties",
-  "Pepitas de chocolate", "Coco ralado", "Avelãs picadas",
-  "Bola de gelado (baunilha)"
+const pancakeSauces = [
+  "Nutella®", "Chocolate negro", "Chocolate branco",
+  "Caramelo salgado", "Pistache", "Coulis de frutos vermelhos",
 ];
+const pancakeToppings = [
+  "Morangos", "Bananas", "Framboesas", "Lotus triturado", "Oreo",
+  "Avelãs picadas", "Smarties", "Pepitas de chocolate", "Coco ralado",
+];
+const pancakeExtras = ["Chantilly", "Bola de gelado (baunilha)"];
 
 const burgerSauces = ["Molho Burger", "Ketchup", "Maionese", "Mostarda"];
 const galetteSauces = ["Ketchup", "Maionese", "Mostarda"];
@@ -19,6 +21,7 @@ type Choice = {
   product: Product;
   toppings: string[];
   sauces: string[];
+  extras: string[];
 };
 
 export function ProductCard({
@@ -42,6 +45,7 @@ export function ProductCard({
       product,
       toppings: [],
       sauces: isPancake ? ["Nutella®"] : [],
+      extras: [],
     });
     setStep(menuProduct ? 1 : 2);
   };
@@ -54,6 +58,7 @@ export function ProductCard({
             product: selected,
             toppings: [],
             sauces: isPancake ? ["Nutella®"] : [],
+            extras: [],
           }
         : current
     );
@@ -69,22 +74,26 @@ export function ProductCard({
 
   const confirmChoice = () => {
     if (!choice) return;
-    if (needsToppings && choice.toppings.length !== 2) return;
+    if (needsToppings && (choice.toppings.length !== 2 || choice.sauces.length !== 1)) return;
 
     const toppingLabel = choice.toppings.join(", ");
     const sauceLabel = choice.sauces.join(", ");
+    const extraLabel = choice.extras.join(", ");
+    const extraCost = choice.extras.length;
     const customization = [
-      sauceLabel ? `Molhos: ${sauceLabel}.` : "",
+      sauceLabel ? `Molho: ${sauceLabel}.` : "",
       toppingLabel ? `Coberturas: ${toppingLabel}.` : "",
+      extraLabel ? `Extras: ${extraLabel} (+${formatPrice(extraCost)}).` : "",
     ]
       .filter(Boolean)
       .join(" ");
 
     add({
       ...choice.product,
-      id: `${choice.product.id}__${choice.sauces.join("|")}__${choice.toppings.join("|")}`,
+      id: `${choice.product.id}__${choice.sauces.join("|")}__${choice.toppings.join("|")}__${choice.extras.join("|")}`,
+      price: choice.product.price + extraCost,
       name: customization
-        ? `${choice.product.name} · ${choice.sauces.join(" + ")}${toppingLabel ? ` · ${toppingLabel}` : ""}`
+        ? `${choice.product.name} · ${choice.sauces.join(" + ")}${toppingLabel ? ` · ${toppingLabel}` : ""}${extraLabel ? ` · ${extraLabel}` : ""}`
         : choice.product.name,
       description: `${choice.product.description}${customization ? ` ${customization}` : ""}`,
     });
@@ -185,11 +194,23 @@ export function ProductCard({
 
                 {isPancake ? (
                   <>
-                    <p>Nutella® incluída + escolhe exatamente 2 coberturas.</p>
+                    <p>Escolhe 1 molho + exatamente 2 toppings. Extras opcionais têm +1 € cada.</p>
                     <div className="selection-section">
-                      <strong>Molho</strong>
+                      <strong>Molho · escolhe 1</strong>
                       <div className="topping-options">
-                        <span className="topping-option is-selected">Nutella®</span>
+                        {pancakeSauces.map((sauce) => {
+                          const selected = choice.sauces.includes(sauce);
+                          return (
+                            <button
+                              type="button"
+                              className={selected ? "topping-option is-selected" : "topping-option"}
+                              key={sauce}
+                              onClick={() => setChoice({ ...choice, sauces: [sauce] })}
+                            >
+                              {sauce}
+                            </button>
+                          );
+                        })}
                       </div>
                     </div>
 
@@ -215,6 +236,32 @@ export function ProductCard({
                               }
                             >
                               {topping}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    <div className="selection-section">
+                      <strong>Extras · +1 € cada</strong>
+                      <div className="topping-options">
+                        {pancakeExtras.map((extra) => {
+                          const selected = choice.extras.includes(extra);
+                          return (
+                            <button
+                              type="button"
+                              className={selected ? "topping-option is-selected" : "topping-option"}
+                              key={extra}
+                              onClick={() =>
+                                setChoice({
+                                  ...choice,
+                                  extras: selected
+                                    ? choice.extras.filter((item) => item !== extra)
+                                    : [...choice.extras, extra],
+                                })
+                              }
+                            >
+                              {extra}
                             </button>
                           );
                         })}
@@ -251,7 +298,7 @@ export function ProductCard({
 
                 <Button
                   tone="gold"
-                  disabled={isPancake ? choice.toppings.length !== 2 : choice.sauces.length === 0}
+                  disabled={isPancake ? (choice.toppings.length !== 2 || choice.sauces.length !== 1) : choice.sauces.length === 0}
                   onClick={confirmChoice}
                 >
                   <Plus size={16} /> Adicionar ao carrinho
