@@ -52,7 +52,7 @@ export function ProductCard({
       sauces: [],
       extras: [],
     });
-    setStep(menuProduct || isPancake ? 1 : 2);
+    setStep(isPancake || menuProduct ? 1 : 2);
   };
 
   const selectFormat = (selected: Product) => {
@@ -153,7 +153,7 @@ export function ProductCard({
             <h2>{choice.product.name.replace(/ · (Só|Menu)$/i, "")}</h2>
             {step !== 1 && <div className="product-title-row product-title-row--price"><strong>{formatPrice(choice.product.price)}</strong></div>}
 
-            {step === 1 && menuProduct ? (
+            {step === 1 && menuProduct && !isPancake ? (
               <>
                 <p>Primeiro, escolhe como queres o teu pedido.</p>
                 <div className="selection-step">
