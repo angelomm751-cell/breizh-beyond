@@ -1,4 +1,7 @@
 import heroImage from "@/assets/breizh-hero.jpg";
+import craftImage from "@/assets/breizh-craft.jpg";
+import menuImage from "@/assets/breizh-menu.jpg";
+import maisonImage from "@/assets/breizh-maison.jpg";
 const pancakePhoto = "https://images.deliveryhero.io/image/talabat/MenuItems/20210707_Talabat_UAE_637614391096634967.jpg";
 const galettePhoto = "https://media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/r/33/c3/d8/c3/caption.jpg";
 const burgerPhoto = "https://www.muratchef.com.tr/upload/resimler/murat-chef-special-burger-bedava-patates-1676496894.jpg";
