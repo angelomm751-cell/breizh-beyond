@@ -194,3 +194,14 @@ iframe[title*="Lovable" i] { display:none !important; visibility:hidden !importa
 .selection-back:hover{color:var(--foreground)}
 .selection-section{margin:1.25rem 0}
 .selection-section>strong{font-size:11px;text-transform:uppercase;letter-spacing:.12em}
+
+/* Mini Pancakes — opções de tamanho */
+.choice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem;margin-top:.8rem}
+.choice-option{position:relative;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-height:112px;padding:1rem;border:1px solid var(--border);border-radius:4px;background:var(--background);color:var(--foreground);text-align:left;cursor:pointer;overflow:hidden;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+.choice-option::before{content:"";position:absolute;inset:0;border-top:2px solid var(--primary);transform:scaleX(.35);transform-origin:left;opacity:.75;transition:transform .2s ease}
+.choice-option:hover{transform:translateY(-3px);border-color:var(--primary);box-shadow:0 10px 25px rgba(0,0,0,.08)}
+.choice-option:hover::before{transform:scaleX(1)}
+.choice-option span{font:500 15px var(--font-sans);letter-spacing:.02em}
+.choice-option strong{margin-top:.45rem;font:600 20px var(--font-sans)}
+.choice-option small{margin-top:.25rem;color:var(--muted-foreground);font-size:10px;letter-spacing:.05em}
+@media(max-width:560px){.choice-grid{grid-template-columns:1fr}.choice-option{min-height:88px}}
