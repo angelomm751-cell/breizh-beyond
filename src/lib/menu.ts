@@ -24,7 +24,7 @@ export const products: Product[] = [
   { id: "king-burger-solo", name: "King Burger · Só", category: "Burger", description: "2 bifes, 2 cheddars, 2 bacons, ovo, galeta de batata, alface e cebola frita.", price: 9.5, image: maisonImage, position: "center" },
   { id: "king-burger-menu", name: "King Burger · Menu", category: "Burger", description: "2 bifes, 2 cheddars, 2 bacons, ovo, galeta de batata, alface e cebola frita. Menu com batatas fritas caseiras, bebida 33cl e molhos: Molho Burger, Ketchup, Maionese ou Mostarda.", price: 13, image: maisonImage, position: "center" },
 
-  { id: "mini-pancakes-small", name: "Mini Pancakes · Pequeno", category: "Mini Pancakes", description: "10 mini pancakes · 1 molho + exatamente 2 toppings incluídos. Extras: Chantilly +1€ ou Bola de gelado (baunilha) +1€.", price: 5, image: menuImage, position: "center" },
+  { id: "mini-pancakes-small", name: "Mini Pancakes · Pequeno", category: "Mini Pancakes", description: "10 mini pancakes · 1 molho + 2 toppings incluídos. Extras: Chantilly +1€ ou Bola de gelado (baunilha) +1€.", price: 5, image: menuImage, position: "center" },
   { id: "mini-pancakes-medium", name: "Mini Pancakes · Médio", category: "Mini Pancakes", description: "15 mini pancakes · 1 molho + exatamente 2 toppings incluídos. Extras: Chantilly +1€ ou Bola de gelado (baunilha) +1€.", price: 7, image: menuImage, position: "center" },
   { id: "mini-pancakes-large", name: "Mini Pancakes · Grande", category: "Mini Pancakes", description: "20 mini pancakes · 1 molho + exatamente 2 toppings incluídos. Extras: Chantilly +1€ ou Bola de gelado (baunilha) +1€.", price: 9, image: menuImage, position: "center" },
 ];
@@ -32,7 +32,7 @@ export const products: Product[] = [
 const localImages: Record<string, string> = { hero: heroImage, craft: craftImage, menu: menuImage, maison: maisonImage };
 export const localImageKeys = Object.keys(localImages);
 export const resolveImage = (value: string) => (value.startsWith("local:") ? localImages[value.slice(6)] ?? heroImage : value);
-export const categories: Category[] = ["Galettes", "Crêpes", "Burger", "Mini Pancakes", "Boissons"];
+export const categories: Category[] = ["Mini Pancakes", "Galettes", "Burger"];
 export const DELIVERY_FEE = 4.0;
 export const FREE_DELIVERY_FROM = 35;
 export const deliveryFeeFor = (subtotal: number, mode: "home" | "pickup") => (mode === "pickup" || subtotal >= FREE_DELIVERY_FROM || subtotal === 0 ? 0 : DELIVERY_FEE);
