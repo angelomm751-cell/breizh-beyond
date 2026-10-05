@@ -150,6 +150,7 @@ export function ProductCard({
 
             <span className="eyebrow">Personalizar pedido</span>
             <h2>{choice.product.name.replace(/ · (Só|Menu)$/i, "")}</h2>
+            {step !== 1 && <div className="product-title-row product-title-row--price"><strong>{formatPrice(choice.product.price)}</strong></div>}
 
             {step === 1 && menuProduct ? (
               <>
