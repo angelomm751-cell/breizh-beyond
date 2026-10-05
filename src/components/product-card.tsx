@@ -12,6 +12,11 @@ const pancakeToppings = [
   "Coco ralado", "Avelãs picadas",
 ];
 const pancakeExtras = ["Chantilly", "Bola de gelado (baunilha)"];
+const pancakeSizes = [
+  { name: "Pequeno", price: 5, count: 10 },
+  { name: "Médio", price: 7, count: 15 },
+  { name: "Grande", price: 9, count: 20 },
+];
 
 const burgerSauces = ["Molho Burger", "Ketchup", "Maionese", "Mostarda"];
 const galetteSauces = ["Molho Burger", "Ketchup", "Maionese", "Mostarda"];
@@ -46,7 +51,7 @@ export function ProductCard({
       sauces: [],
       extras: [],
     });
-    setStep(menuProduct ? 1 : 2);
+    setStep(menuProduct || isPancake ? 1 : 2);
   };
 
   const selectFormat = (selected: Product) => {
@@ -191,7 +196,41 @@ export function ProductCard({
                   </button>
                 )}
 
-                {isPancake ? (
+                {isPancake && step === 1 ? (
+                  <div className="choice-section">
+                    <h4>Escolhe o tamanho</h4>
+                    <div className="choice-grid">
+                      {pancakeSizes.map((size) => (
+                        <button
+                          key={size.name}
+                          type="button"
+                          className="choice-option"
+                          onClick={() => {
+                            setChoice((current) =>
+                              current
+                                ? {
+                                    ...current,
+                                    product: {
+                                      ...current.product,
+                                      id: `mini-pancakes-${size.name.toLowerCase()}`,
+                                      name: `Mini Pancakes · ${size.name}`,
+                                      description: `${size.count} mini pancakes · 1 molho + 2 toppings incluídos.`,
+                                      price: size.price,
+                                    },
+                                  }
+                                : current
+                            );
+                            setStep(2);
+                          }}
+                        >
+                          <span>{size.name}</span>
+                          <strong>{formatPrice(size.price)}</strong>
+                          <small>{size.count} mini pancakes</small>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                ) : isPancake ? (
                   <>
                     <p>Escolhe 1 molho + exatamente 2 toppings. Extras opcionais têm +1 € cada.</p>
                     <div className="selection-section">
