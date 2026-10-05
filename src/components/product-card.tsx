@@ -128,10 +128,6 @@ export function ProductCard({
             <h3>{product.name.replace(/ · Só$/i, "")}</h3>
           </div>
 
-          <div className="product-title-row product-title-row--price">
-            <strong>{formatPrice(product.price)}</strong>
-          </div>
-
           <p>{product.description.replace(/ Menu com.*$/i, "")}</p>
 
           <Button
@@ -168,7 +164,7 @@ export function ProductCard({
                       <strong>Só</strong>
                       <small>Sem menu</small>
                     </span>
-                    <b>{formatPrice(product.price)}</b>
+                    
                   </button>
 
                   <button
@@ -180,7 +176,7 @@ export function ProductCard({
                       <strong>Menu</strong>
                       <small>{product.category === "Galettes" ? "Batatas fritas caseiras + pequena salada + bebida 33cl" : "Batatas fritas caseiras + bebida 33cl"}</small>
                     </span>
-                    <b>{formatPrice(menuProduct.price)}</b>
+                    
                   </button>
                 </div>
               </>
@@ -224,7 +220,6 @@ export function ProductCard({
                           }}
                         >
                           <span>{size.name}</span>
-                          <strong>{formatPrice(size.price)}</strong>
                           <small>{size.count} mini pancakes</small>
                         </button>
                       ))}
