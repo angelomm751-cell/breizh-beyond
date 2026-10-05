@@ -44,7 +44,7 @@ export function ProductCard({
     setChoice({
       product,
       toppings: [],
-      sauces: isPancake ? ["Nutella®"] : [],
+      sauces: [],
       extras: [],
     });
     setStep(menuProduct ? 1 : 2);
@@ -57,7 +57,7 @@ export function ProductCard({
             ...current,
             product: selected,
             toppings: [],
-            sauces: isPancake ? ["Nutella®"] : [],
+            sauces: [],
             extras: [],
           }
         : current
