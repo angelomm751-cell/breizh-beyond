@@ -6,6 +6,7 @@ import maisonImage from "@/assets/breizh-maison.jpg";
 export type Category = "Galettes" | "Crêpes" | "Burger" | "Mini Pancakes" | "Boissons";
 export type Product = { id: string; name: string; category: Category; description: string; price: number; image: string; position: string };
 
+// Ementa pública BREIZH FOOD — fluxo de seleção Só/Menu e personalização no carrinho.
 export const products: Product[] = [
   { id: "galette-complete-solo", name: "Galette Complète · Só", category: "Galettes", description: "Fiambre, Gruyère ralado e ovo.", price: 6, image: heroImage, position: "center" },
   { id: "galette-complete-menu", name: "Galette Complète · Menu", category: "Galettes", description: "Fiambre, Gruyère ralado e ovo. Menu com batatas fritas caseiras, pequena salada, bebida 33cl e molhos à escolha.", price: 9, image: heroImage, position: "center" },
