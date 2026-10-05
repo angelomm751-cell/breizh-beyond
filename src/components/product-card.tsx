@@ -4,13 +4,12 @@ import { Button } from "./button";
 import { useCart } from "./cart";
 import { formatPrice, type Product } from "@/lib/menu";
 
-const pancakeSauces = [
-  "Nutella®", "Chocolate negro", "Chocolate branco",
-  "Caramelo salgado", "Pistache", "Coulis de frutos vermelhos",
-];
+const pancakeSauces = ["Nutella®"];
 const pancakeToppings = [
-  "Morangos", "Bananas", "Framboesas", "Lotus triturado", "Oreo",
-  "Avelãs picadas", "Smarties", "Pepitas de chocolate", "Coco ralado",
+  "Morangos", "Bananas", "Framboesas", "Chocolate negro", "Chocolate branco",
+  "Lotus", "Oreo", "Caramelo salgado triturado", "Pistache",
+  "Coulis de frutos vermelhos", "Smarties", "Pepitas de chocolate",
+  "Coco ralado", "Avelãs picadas",
 ];
 const pancakeExtras = ["Chantilly", "Bola de gelado (baunilha)"];
 
