@@ -15,7 +15,7 @@ const pancakeToppings = [
 const pancakeExtras = ["Chantilly", "Bola de gelado (baunilha)"];
 
 const burgerSauces = ["Molho Burger", "Ketchup", "Maionese", "Mostarda"];
-const galetteSauces = ["Ketchup", "Maionese", "Mostarda"];
+const galetteSauces = ["Molho Burger", "Ketchup", "Maionese", "Mostarda"];
 
 type Choice = {
   product: Product;
@@ -174,7 +174,7 @@ export function ProductCard({
                   >
                     <span>
                       <strong>Menu</strong>
-                      <small>Batatas + bebida + extras incluídos</small>
+                      <small>{product.category === "Galettes" ? "Batatas fritas caseiras + pequena salada + bebida 33cl" : "Batatas fritas caseiras + bebida 33cl"}</small>
                     </span>
                     <b>{formatPrice(menuProduct.price)}</b>
                   </button>
@@ -270,7 +270,7 @@ export function ProductCard({
                   </>
                 ) : (
                   <>
-                    <p>Escolhe todos os molhos que quiseres — podes selecionar vários.</p>
+                    <p>{product.category === "Galettes" ? "Escolhe os molhos que quiseres — Ketchup, Maionese, Mostarda e Molho Burger. Podes selecionar vários." : "Escolhe os molhos que quiseres — Molho Burger, Ketchup, Maionese e Mostarda. Podes selecionar vários."}</p>
                     <div className="selection-section">
                       <strong>Molho</strong>
                       <div className="topping-options">
