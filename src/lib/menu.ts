@@ -3,7 +3,7 @@ import craftImage from "@/assets/breizh-craft.jpg";
 import menuImage from "@/assets/breizh-menu.jpg";
 import maisonImage from "@/assets/breizh-maison.jpg";
 
-export type Category = "Galettes" | "Crêpes" | "Burger" | "Mini Pancakes" | "Boissons";
+export type Category = "Mini Pancakes" | "Galettes" | "Burger";
 export type Product = { id: string; name: string; category: Category; description: string; price: number; image: string; position: string };
 
 // Ementa pública BREIZH FOOD — fluxo de seleção Só/Menu e personalização no carrinho.
@@ -25,8 +25,8 @@ export const products: Product[] = [
   { id: "king-burger-menu", name: "King Burger · Menu", category: "Burger", description: "2 bifes, 2 cheddars, 2 bacons, ovo, galeta de batata, alface e cebola frita. Menu com batatas fritas caseiras, bebida 33cl e molhos: Molho Burger, Ketchup, Maionese ou Mostarda.", price: 13, image: maisonImage, position: "center" },
 
   { id: "mini-pancakes-small", name: "Mini Pancakes · Pequeno", category: "Mini Pancakes", description: "10 mini pancakes · 1 molho + 2 toppings incluídos. Extras: Chantilly +1€ ou Bola de gelado (baunilha) +1€.", price: 5, image: menuImage, position: "center" },
-  { id: "mini-pancakes-medium", name: "Mini Pancakes · Médio", category: "Mini Pancakes", description: "15 mini pancakes · 1 molho + exatamente 2 toppings incluídos. Extras: Chantilly +1€ ou Bola de gelado (baunilha) +1€.", price: 7, image: menuImage, position: "center" },
-  { id: "mini-pancakes-large", name: "Mini Pancakes · Grande", category: "Mini Pancakes", description: "20 mini pancakes · 1 molho + exatamente 2 toppings incluídos. Extras: Chantilly +1€ ou Bola de gelado (baunilha) +1€.", price: 9, image: menuImage, position: "center" },
+  { id: "mini-pancakes-medium", name: "Mini Pancakes · Médio", category: "Mini Pancakes", description: "15 mini pancakes · 1 molho + 2 toppings incluídos. Extras: Chantilly +1€ ou Bola de gelado (baunilha) +1€.", price: 7, image: menuImage, position: "center" },
+  { id: "mini-pancakes-large", name: "Mini Pancakes · Grande", category: "Mini Pancakes", description: "20 mini pancakes · 1 molho + 2 toppings incluídos. Extras: Chantilly +1€ ou Bola de gelado (baunilha) +1€.", price: 9, image: menuImage, position: "center" },
 ];
 
 const localImages: Record<string, string> = { hero: heroImage, craft: craftImage, menu: menuImage, maison: maisonImage };
