@@ -21,6 +21,7 @@ const pancakeSizes = [
 
 const burgerSauces = ["Molho Burger", "Ketchup", "Maionese", "Mostarda"];
 const galetteSauces = ["Molho Burger", "Ketchup", "Maionese", "Mostarda"];
+const drinkOptions = ["Coca-Cola", "Coca-Cola Zero", "Ice Tea Limão", "Ice Tea Pêssego", "Fanta Laranja", "Sprite", "Água"];
 
 type Choice = {
   product: Product;
@@ -82,7 +83,7 @@ export function ProductCard({
 
   const confirmChoice = () => {
     if (!choice) return;
-    if (choice.product.category === "Burger" && choice.product.name.endsWith(" · Menu") && !choice.drink) { setStep(3); return; }
+    if (choice.product.name.endsWith(" · Menu") && !choice.drink) { setStep(3); return; }
     if (needsToppings && (choice.toppings.length !== 2 || choice.sauces.length !== 1)) return;
 
     const toppingLabel = choice.toppings.join(", ");
@@ -203,9 +204,11 @@ export function ProductCard({
                 {step === 3 ? (
                   <div className="choice-section">
                     <h4>Escolhe a bebida</h4>
-                    <p>Seleciona a bebida incluída no menu. As opções específicas de bebidas ainda não estão configuradas na ementa online.</p>
+                    <p>Seleciona a bebida de 33 cl incluída no menu.</p>
                     <div className="topping-options">
-                      <button type="button" className={choice.drink ? "topping-option is-selected" : "topping-option"} onClick={() => setChoice({ ...choice, drink: "Bebida 33 cl à escolha" })}>Bebida 33 cl à escolha</button>
+                      {drinkOptions.map((drink) => (
+                        <button type="button" key={drink} className={choice.drink === drink ? "topping-option is-selected" : "topping-option"} onClick={() => setChoice({ ...choice, drink })}>{drink}</button>
+                      ))}
                     </div>
                     <button type="button" className="selection-back" onClick={() => setStep(2)}><ChevronLeft size={15} /> Voltar aos molhos</button>
                   </div>
@@ -351,7 +354,7 @@ export function ProductCard({
                   disabled={isPancake ? (choice.toppings.length !== 2 || choice.sauces.length !== 1) : step === 3 ? !choice.drink : choice.sauces.length === 0}
                   onClick={confirmChoice}
                 >
-                  <Plus size={16} /> {step === 2 && choice.product.category === "Burger" && choice.product.name.endsWith(" · Menu") ? "Continuar para bebidas" : "Adicionar ao carrinho"}
+                  <Plus size={16} /> {step === 2 && choice.product.name.endsWith(" · Menu") ? "Continuar para bebidas" : "Adicionar ao carrinho"}
                 </Button>
               </>
             )}
