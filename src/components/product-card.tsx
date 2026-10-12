@@ -48,8 +48,9 @@ export function ProductCard({
   const [animationRemoving, setAnimationRemoving] = useState(false);
 
   const animateIngredient = (item: string, removing = false) => {
-    setAnimationItem(item);
-    setAnimationRemoving(removing);
+    // Removing a sauce should simply remove the visual; never replay a falling animation.
+    setAnimationItem(removing ? "" : item);
+    setAnimationRemoving(false);
     setAnimationKey((key) => key + 1);
   };
 
@@ -180,10 +181,28 @@ export function ProductCard({
             {step !== 1 && <div className="product-title-row product-title-row--price"><strong>{formatPrice(choice.product.price)}</strong></div>}
             {step === 2 && (
               <div className={`food-animation food-animation--${product.category === "Mini Pancakes" ? "pancakes" : product.category === "Galettes" ? "galette" : "burger"}`} aria-live="polite" aria-label={animationItem ? `Animação: ${animationItem}` : "Pré-visualização do produto"}>
-                <div className="food-animation__base" />
-                <div className="food-animation__filling" />
-                <div className="food-animation__top" />
-                {animationItem && <span key={animationKey} aria-label={animationItem} className={`food-animation__ingredient ${isSauceAnimation ? "is-sauce" : "is-solid"} ${animationRemoving ? "is-removing" : ""}`} style={isSauceAnimation ? ({ "--sauce-color": sauceColor } as React.CSSProperties) : undefined}>{isSauceAnimation ? <><i className="food-animation__sauce-stream" /><i className="food-animation__sauce-drop" /><i className="food-animation__sauce-splash" /></> : <span className="food-animation__ingredient-label">{animationItem}</span>}</span>}
+                {product.category === "Burger" ? (
+                  <div className={`burger-art ${/frango/i.test(choice.product.name) ? "burger-art--chicken" : "burger-art--beef"} ${/raclette/i.test(choice.product.name) ? "burger-art--raclette" : ""} ${/king burger/i.test(choice.product.name) ? "burger-art--king" : ""}`} aria-hidden="true">
+                    <span className="burger-art__bottom" />
+                    <span className="burger-art__lettuce" />
+                    {/king burger/i.test(choice.product.name) && <span className="burger-art__patty burger-art__patty--lower" />}
+                    {/king burger/i.test(choice.product.name) && <span className="burger-art__cheese burger-art__cheese--lower" />}
+                    {/king burger/i.test(choice.product.name) && <span className="burger-art__potato" />}
+                    <span className="burger-art__patty" />
+                    <span className="burger-art__cheese" />
+                    {/raclette|king burger/i.test(choice.product.name) && <span className="burger-art__bacon" />}
+                    {/king burger/i.test(choice.product.name) && <span className="burger-art__egg" />}
+                    <span className="burger-art__onion" />
+                    <span className="burger-art__top" />
+                  </div>
+                ) : (
+                  <>
+                    <div className="food-animation__base" />
+                    <div className="food-animation__filling" />
+                    <div className="food-animation__top" />
+                  </>
+                )}
+                {animationItem && <span key={animationKey} aria-label={animationItem} className={`food-animation__ingredient ${isSauceAnimation ? "is-sauce" : "is-solid"}`} style={isSauceAnimation ? ({ "--sauce-color": sauceColor } as React.CSSProperties) : undefined}>{isSauceAnimation ? <><i className="food-animation__sauce-stream" /><i className="food-animation__sauce-drop" /><i className="food-animation__sauce-splash" /></> : <span className="food-animation__ingredient-label">{animationItem}</span>}</span>}
               </div>
             )}
 
