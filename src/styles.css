@@ -224,26 +224,33 @@ iframe[title*="Lovable" i] { display:none !important; visibility:hidden !importa
 @media(max-width:480px){.category-grid{grid-template-columns:1fr}.category-card__image{height:260px}.category-card__copy{flex-direction:row;align-items:center}}
 
 
-/* Lightweight ingredient animations for the product configurator */
-.food-animation{position:relative;height:112px;margin:.7rem 0 1.3rem;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;isolation:isolate;background:linear-gradient(135deg,rgba(190,150,93,.09),rgba(255,255,255,.025));border:1px solid var(--border);perspective:500px}
+/* Lightweight illustrated food builder and realistic sauce animations */
+.food-animation{position:relative;height:156px;margin:.7rem 0 1.3rem;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse at 50% 90%,rgba(190,150,93,.18),transparent 62%),linear-gradient(135deg,rgba(190,150,93,.09),rgba(255,255,255,.025));border:1px solid var(--border);perspective:500px}
 .food-animation__base,.food-animation__filling,.food-animation__top{position:absolute;left:50%;transform:translateX(-50%);display:block}
-.food-animation--burger .food-animation__base{bottom:18px;width:150px;height:24px;border-radius:8px 8px 20px 20px;background:linear-gradient(#dba65b,#b97632);box-shadow:inset 0 -5px 0 rgba(111,54,19,.12)}
-.food-animation--burger .food-animation__filling{bottom:40px;width:144px;height:13px;border-radius:4px;background:#513026;box-shadow:0 -6px 0 #d9a72d,0 -11px 0 #557343}
-.food-animation--burger .food-animation__top{bottom:52px;width:145px;height:38px;border-radius:76px 76px 12px 12px;background:linear-gradient(#f5d18a,#d79a4d);transform:translateX(-50%);transform-origin:50% 100%}
-.food-animation--galette .food-animation__base{bottom:18px;width:180px;height:17px;border-radius:50%;background:linear-gradient(#d4a25d,#a96f36);box-shadow:0 4px 0 rgba(80,40,15,.12)}
-.food-animation--galette .food-animation__filling{bottom:31px;width:125px;height:10px;border-radius:50%;background:#e5c76e}
-.food-animation--galette .food-animation__top{bottom:35px;width:125px;height:18px;border-radius:50% 50% 4px 4px;background:#c68b43;opacity:.85}
-.food-animation--pancakes .food-animation__base{bottom:20px;width:108px;height:18px;border-radius:50%;background:#d49a4f;box-shadow:0 8px 0 #e2b86e,0 16px 0 #bd7d3d}
-.food-animation--pancakes .food-animation__filling{bottom:43px;width:90px;height:7px;border-radius:50%;background:#f0c678}
-.food-animation--pancakes .food-animation__top{bottom:46px;width:108px;height:17px;border-radius:50%;background:#e9bd75}
-.food-animation__ingredient{position:absolute;z-index:2;left:50%;top:4px;max-width:85%;padding:.3rem .6rem;border-radius:999px;background:var(--card);border:1px solid var(--gold);color:var(--foreground);font-size:10px;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,.12);transform:translateX(-50%);animation:ingredient-drop .72s cubic-bezier(.2,.7,.25,1) both}
-.food-animation__ingredient.is-sauce{background:var(--wine);border-color:var(--wine);color:#fff;animation:ingredient-sauce .72s cubic-bezier(.2,.7,.25,1) both}
+.food-animation--burger .food-animation__base{bottom:18px;width:156px;height:28px;border-radius:9px 9px 27px 27px;background:linear-gradient(180deg,#f3c879 0%,#d99745 72%,#b86e2e 100%);box-shadow:inset 0 -5px 0 rgba(111,54,19,.13),0 7px 9px rgba(49,25,13,.16)}
+.food-animation--burger .food-animation__filling{bottom:43px;width:148px;height:15px;border-radius:7px;background:linear-gradient(180deg,#66402b,#392018);box-shadow:0 -5px 0 #f4c83e,0 -10px 0 #65964c,0 -14px 0 #df6543}
+.food-animation--burger .food-animation__top{bottom:55px;width:154px;height:46px;border-radius:85px 85px 18px 18px;background:radial-gradient(ellipse at 50% 8%,#ffe4a4 0%,transparent 52%),linear-gradient(180deg,#f7d995 0%,#e9b866 72%,#c9833d 100%);box-shadow:inset 0 -5px 0 rgba(145,79,30,.12),0 4px 7px rgba(67,35,15,.1);transform:translateX(-50%);transform-origin:50% 100%}
+.food-animation--burger .food-animation__top:after{content:"";position:absolute;inset:8px 22px 12px;background:radial-gradient(ellipse at 20% 30%,#fff0c5 0 2px,transparent 3px),radial-gradient(ellipse at 48% 18%,#fff0c5 0 2px,transparent 3px),radial-gradient(ellipse at 72% 35%,#fff0c5 0 2px,transparent 3px),radial-gradient(ellipse at 34% 55%,#fff0c5 0 2px,transparent 3px),radial-gradient(ellipse at 63% 62%,#fff0c5 0 2px,transparent 3px);transform:rotate(-7deg)}
+.food-animation--galette .food-animation__base{bottom:23px;width:190px;height:26px;border-radius:50%;background:linear-gradient(#f1c777,#bb7939);box-shadow:inset 0 -4px 0 rgba(80,40,15,.12),0 6px 8px rgba(49,25,13,.12)}
+.food-animation--galette .food-animation__filling{bottom:38px;width:135px;height:13px;border-radius:50%;background:#e5c76e;box-shadow:0 -5px 0 #658b45,0 -9px 0 #d4a14f}
+.food-animation--galette .food-animation__top{bottom:39px;width:132px;height:20px;border-radius:50% 50% 5px 5px;background:linear-gradient(#e5b763,#b97a37);opacity:.9}
+.food-animation--pancakes .food-animation__base{bottom:24px;width:110px;height:23px;border-radius:50%;background:linear-gradient(#f4d18d,#d79a4f);box-shadow:0 9px 0 #e5b96e,0 18px 0 #bf7d3c,0 6px 9px rgba(49,25,13,.13)}
+.food-animation--pancakes .food-animation__filling{bottom:49px;width:94px;height:9px;border-radius:50%;background:#f0c678}
+.food-animation--pancakes .food-animation__top{bottom:49px;width:112px;height:20px;border-radius:50%;background:linear-gradient(#ffe0a1,#dfa65a)}
+.food-animation__ingredient{position:absolute;z-index:4;left:50%;top:4px;width:160px;height:118px;transform:translateX(-50%);pointer-events:none}
+.food-animation__ingredient.is-sauce{color:var(--sauce-color,#c92532)}
+.food-animation__sauce-stream{position:absolute;left:calc(50% - 3px);top:0;width:6px;height:0;border-radius:8px;background:var(--sauce-color);box-shadow:0 0 3px color-mix(in srgb,var(--sauce-color),transparent 35%);animation:sauce-pour .68s cubic-bezier(.25,.7,.25,1) both}
+.food-animation__sauce-drop{position:absolute;left:calc(50% - 7px);top:0;width:14px;height:19px;border-radius:55% 45% 60% 60%;background:linear-gradient(135deg,color-mix(in srgb,var(--sauce-color),white 25%),var(--sauce-color) 65%,color-mix(in srgb,var(--sauce-color),black 20%));box-shadow:0 2px 3px rgba(35,15,8,.18);animation:sauce-drop .68s cubic-bezier(.2,.7,.25,1) both}
+.food-animation__sauce-splash{position:absolute;left:50%;top:87px;width:8px;height:5px;border-radius:50%;background:var(--sauce-color);opacity:0;transform:translateX(-50%);animation:sauce-splash .68s ease-out both}
+.food-animation__ingredient.is-solid{width:auto;height:auto;max-width:85%;top:8px;padding:.35rem .65rem;border-radius:999px;background:var(--card);border:1px solid var(--gold);color:var(--foreground);font-size:10px;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,.12);animation:ingredient-drop .72s cubic-bezier(.2,.7,.25,1) both}
+.food-animation__ingredient-label{display:block}
 .food-animation--burger:has(.food-animation__ingredient) .food-animation__top{animation:burger-open-close .72s ease-in-out both}
+@keyframes sauce-pour{0%{height:0;opacity:0}15%{opacity:1}62%{height:75px;opacity:1}78%{height:85px;opacity:.8}100%{height:0;opacity:0}}
+@keyframes sauce-drop{0%{opacity:0;transform:translateY(-5px) scale(.7)}18%{opacity:1}72%{transform:translateY(75px) scale(1)}85%{opacity:1;transform:translateY(84px) scale(1.3,.7)}100%{opacity:0;transform:translateY(87px) scale(1.5,.5)}}
+@keyframes sauce-splash{0%,70%{opacity:0;transform:translateX(-50%) scale(.2)}82%{opacity:.9;transform:translateX(-50%) scale(1.8,.8)}100%{opacity:0;transform:translateX(-50%) scale(2.6,.5)}}
 @keyframes ingredient-drop{0%{opacity:0;transform:translate(-50%,-30px) rotate(-8deg) scale(.8)}45%{opacity:1}75%{transform:translate(-50%,57px) rotate(3deg) scale(1.03)}100%{opacity:1;transform:translate(-50%,57px) scale(1)}}
-@keyframes ingredient-sauce{0%{opacity:0;transform:translate(-50%,-30px) scale(.7);border-radius:50%}45%{opacity:1}75%{transform:translate(-50%,57px) scale(1.08,1.3);border-radius:8px}100%{opacity:1;transform:translate(-50%,57px) scale(1.15,.65);border-radius:8px}}
-@keyframes burger-open-close{0%,100%{translate:0 0}25%{translate:0 -12px;rotate:-2deg}65%{translate:0 -12px;rotate:1deg}85%{translate:0 2px}}
-@media(prefers-reduced-motion:reduce){.food-animation__ingredient,.food-animation--burger:has(.food-animation__ingredient) .food-animation__top{animation:none}}
-
+@keyframes burger-open-close{0%,100%{translate:0 0}25%{translate:0 -14px;rotate:-2deg}65%{translate:0 -14px;rotate:1deg}85%{translate:0 2px}}
+@media(prefers-reduced-motion:reduce){.food-animation__ingredient,.food-animation--burger:has(.food-animation__ingredient) .food-animation__top{animation:none}.food-animation__sauce-stream,.food-animation__sauce-drop,.food-animation__sauce-splash{animation:none;display:none}}
 /* Reverse motion when removing a selected ingredient */
 .food-animation__ingredient.is-removing{animation:ingredient-remove .42s ease-in both}
 @keyframes ingredient-remove{0%{opacity:1;transform:translate(-50%,57px) scale(1)}100%{opacity:0;transform:translate(-50%,-24px) scale(.72)}}
