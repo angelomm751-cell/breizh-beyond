@@ -222,3 +222,24 @@ iframe[title*="Lovable" i] { display:none !important; visibility:hidden !importa
 .category-back{display:inline-flex;align-items:center;gap:.6rem;margin:0 0 2.5rem;padding:0 0 .55rem;border:0;border-bottom:1px solid var(--gold);background:transparent;color:var(--foreground);font-size:9px;text-transform:uppercase;letter-spacing:.15em}
 @media(max-width:800px){.category-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.category-card__image{height:clamp(190px,42vw,300px)}.category-card__copy{align-items:flex-start;flex-direction:column;gap:.65rem;padding:1rem}.category-card__copy strong{font-size:1.8rem}.category-card__copy>span{font-size:8px}}
 @media(max-width:480px){.category-grid{grid-template-columns:1fr}.category-card__image{height:260px}.category-card__copy{flex-direction:row;align-items:center}}
+
+
+/* Lightweight ingredient animations for the product configurator */
+.food-animation{position:relative;height:112px;margin:.7rem 0 1.3rem;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;isolation:isolate;background:linear-gradient(135deg,rgba(190,150,93,.09),rgba(255,255,255,.025));border:1px solid var(--border);perspective:500px}
+.food-animation__base,.food-animation__filling,.food-animation__top{position:absolute;left:50%;transform:translateX(-50%);display:block}
+.food-animation--burger .food-animation__base{bottom:18px;width:150px;height:24px;border-radius:8px 8px 20px 20px;background:linear-gradient(#dba65b,#b97632);box-shadow:inset 0 -5px 0 rgba(111,54,19,.12)}
+.food-animation--burger .food-animation__filling{bottom:40px;width:144px;height:13px;border-radius:4px;background:#513026;box-shadow:0 -6px 0 #d9a72d,0 -11px 0 #557343}
+.food-animation--burger .food-animation__top{bottom:52px;width:145px;height:38px;border-radius:76px 76px 12px 12px;background:linear-gradient(#f5d18a,#d79a4d);transform:translateX(-50%);transform-origin:50% 100%}
+.food-animation--galette .food-animation__base{bottom:18px;width:180px;height:17px;border-radius:50%;background:linear-gradient(#d4a25d,#a96f36);box-shadow:0 4px 0 rgba(80,40,15,.12)}
+.food-animation--galette .food-animation__filling{bottom:31px;width:125px;height:10px;border-radius:50%;background:#e5c76e}
+.food-animation--galette .food-animation__top{bottom:35px;width:125px;height:18px;border-radius:50% 50% 4px 4px;background:#c68b43;opacity:.85}
+.food-animation--pancakes .food-animation__base{bottom:20px;width:108px;height:18px;border-radius:50%;background:#d49a4f;box-shadow:0 8px 0 #e2b86e,0 16px 0 #bd7d3d}
+.food-animation--pancakes .food-animation__filling{bottom:43px;width:90px;height:7px;border-radius:50%;background:#f0c678}
+.food-animation--pancakes .food-animation__top{bottom:46px;width:108px;height:17px;border-radius:50%;background:#e9bd75}
+.food-animation__ingredient{position:absolute;z-index:2;left:50%;top:4px;max-width:85%;padding:.3rem .6rem;border-radius:999px;background:var(--card);border:1px solid var(--gold);color:var(--foreground);font-size:10px;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,.12);transform:translateX(-50%);animation:ingredient-drop .72s cubic-bezier(.2,.7,.25,1) both}
+.food-animation__ingredient.is-sauce{background:var(--wine);border-color:var(--wine);color:#fff;animation:ingredient-sauce .72s cubic-bezier(.2,.7,.25,1) both}
+.food-animation--burger:has(.food-animation__ingredient) .food-animation__top{animation:burger-open-close .72s ease-in-out both}
+@keyframes ingredient-drop{0%{opacity:0;transform:translate(-50%,-30px) rotate(-8deg) scale(.8)}45%{opacity:1}75%{transform:translate(-50%,57px) rotate(3deg) scale(1.03)}100%{opacity:1;transform:translate(-50%,57px) scale(1)}}
+@keyframes ingredient-sauce{0%{opacity:0;transform:translate(-50%,-30px) scale(.7);border-radius:50%}45%{opacity:1}75%{transform:translate(-50%,57px) scale(1.08,1.3);border-radius:8px}100%{opacity:1;transform:translate(-50%,57px) scale(1.15,.65);border-radius:8px}}
+@keyframes burger-open-close{0%,100%{translate:0 0}25%{translate:0 -12px;rotate:-2deg}65%{translate:0 -12px;rotate:1deg}85%{translate:0 2px}}
+@media(prefers-reduced-motion:reduce){.food-animation__ingredient,.food-animation--burger:has(.food-animation__ingredient) .food-animation__top{animation:none}}
