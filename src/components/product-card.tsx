@@ -43,6 +43,13 @@ export function ProductCard({
   const { add } = useCart();
   const [choice, setChoice] = useState<Choice | null>(null);
   const [step, setStep] = useState<1 | 2 | 3>(1);
+  const [animationItem, setAnimationItem] = useState("");
+  const [animationKey, setAnimationKey] = useState(0);
+
+  const animateIngredient = (item: string) => {
+    setAnimationItem(item);
+    setAnimationKey((key) => key + 1);
+  };
 
   const isPancake = product.category === "Mini Pancakes";
   const needsToppings = isPancake;
@@ -159,6 +166,14 @@ export function ProductCard({
             <span className="eyebrow">Personalizar pedido</span>
             <h2>{choice.product.name.replace(/ · (Só|Menu)$/i, "")}</h2>
             {step !== 1 && <div className="product-title-row product-title-row--price"><strong>{formatPrice(choice.product.price)}</strong></div>}
+            {step === 2 && (
+              <div className={`food-animation food-animation--${product.category === "Mini Pancakes" ? "pancakes" : product.category === "Galettes" ? "galette" : "burger"}`} aria-live="polite" aria-label={animationItem ? `Animação: ${animationItem}` : "Pré-visualização do produto"}>
+                <div className="food-animation__base" />
+                <div className="food-animation__filling" />
+                <div className="food-animation__top" />
+                {animationItem && <span key={animationKey} className={`food-animation__ingredient ${/molho|ketchup|maionese|mostarda|nutella|chocolate|caramelo|coulis|pistache/i.test(animationItem) ? "is-sauce" : "is-solid"}`}>{animationItem}</span>}
+              </div>
+            )}
 
             {step === 1 && menuProduct && !isPancake ? (
               <>
@@ -258,7 +273,7 @@ export function ProductCard({
                               type="button"
                               className={selected ? "topping-option is-selected" : "topping-option"}
                               key={sauce}
-                              onClick={() => setChoice({ ...choice, sauces: [sauce] })}
+                              onClick={() => { setChoice({ ...choice, sauces: [sauce] }); animateIngredient(sauce); }}
                             >
                               {sauce}
                             </button>
@@ -277,7 +292,7 @@ export function ProductCard({
                               type="button"
                               className={selected ? "topping-option is-selected" : "topping-option"}
                               key={topping}
-                              onClick={() =>
+                              onClick={() => {
                                 setChoice({
                                   ...choice,
                                   toppings: selected
@@ -285,8 +300,9 @@ export function ProductCard({
                                     : choice.toppings.length < 2
                                       ? [...choice.toppings, topping]
                                       : choice.toppings,
-                                })
-                              }
+                                });
+                                animateIngredient(topping);
+                              }}
                             >
                               {topping}
                             </button>
@@ -305,14 +321,15 @@ export function ProductCard({
                               type="button"
                               className={selected ? "topping-option is-selected" : "topping-option"}
                               key={extra}
-                              onClick={() =>
+                              onClick={() => {
                                 setChoice({
                                   ...choice,
                                   extras: selected
                                     ? choice.extras.filter((item) => item !== extra)
                                     : [...choice.extras, extra],
-                                })
-                              }
+                                });
+                                animateIngredient(extra);
+                              }}
                             >
                               {extra}
                             </button>
@@ -332,14 +349,15 @@ export function ProductCard({
                             type="button"
                             key={sauce}
                             className={choice.sauces.includes(sauce) ? "topping-option is-selected" : "topping-option"}
-                            onClick={() =>
+                            onClick={() => {
                               setChoice({
                                 ...choice,
                                 sauces: choice.sauces.includes(sauce)
                                   ? choice.sauces.filter((item) => item !== sauce)
                                   : [...choice.sauces, sauce],
-                              })
-                            }
+                              });
+                              animateIngredient(sauce);
+                            }}
                           >
                             {sauce}
                           </button>
