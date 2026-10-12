@@ -196,6 +196,7 @@ export function ProductCard({
                     {/king burger/i.test(choice.product.name) && <span className="burger-art__egg" />}
                     <span className="burger-art__onion" />
                     <span className="burger-art__top" />
+                    {animationItem && isSauceAnimation && <span className="burger-art__sauce-mark" style={{ "--sauce-color": sauceColor } as React.CSSProperties} aria-hidden="true" />}
                   </div>
                 ) : (
                   <>
