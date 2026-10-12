@@ -27,6 +27,7 @@ type Choice = {
   toppings: string[];
   sauces: string[];
   extras: string[];
+  drink: string;
 };
 
 export function ProductCard({
@@ -40,7 +41,7 @@ export function ProductCard({
 }) {
   const { add } = useCart();
   const [choice, setChoice] = useState<Choice | null>(null);
-  const [step, setStep] = useState<1 | 2>(1);
+  const [step, setStep] = useState<1 | 2 | 3>(1);
 
   const isPancake = product.category === "Mini Pancakes";
   const needsToppings = isPancake;
@@ -51,6 +52,7 @@ export function ProductCard({
       toppings: [],
       sauces: [],
       extras: [],
+      drink: "",
     });
     setStep(isPancake || menuProduct ? 1 : 2);
   };
@@ -64,6 +66,7 @@ export function ProductCard({
             toppings: [],
             sauces: [],
             extras: [],
+            drink: "",
           }
         : current
     );
@@ -79,16 +82,19 @@ export function ProductCard({
 
   const confirmChoice = () => {
     if (!choice) return;
+    if (choice.product.category === "Burger" && choice.product.name.endsWith(" · Menu") && !choice.drink) { setStep(3); return; }
     if (needsToppings && (choice.toppings.length !== 2 || choice.sauces.length !== 1)) return;
 
     const toppingLabel = choice.toppings.join(", ");
     const sauceLabel = choice.sauces.join(", ");
     const extraLabel = choice.extras.join(", ");
+    const drinkLabel = choice.drink;
     const extraCost = choice.extras.length;
     const customization = [
       sauceLabel ? `Molho: ${sauceLabel}.` : "",
       toppingLabel ? `Coberturas: ${toppingLabel}.` : "",
       extraLabel ? `Extras: ${extraLabel} (+${formatPrice(extraCost)}).` : "",
+      drinkLabel ? `Bebida: ${drinkLabel}.` : "",
     ]
       .filter(Boolean)
       .join(" ");
@@ -98,7 +104,7 @@ export function ProductCard({
       id: `${choice.product.id}__${choice.sauces.join("|")}__${choice.toppings.join("|")}__${choice.extras.join("|")}`,
       price: choice.product.price + extraCost,
       name: customization
-        ? `${choice.product.name} · ${choice.sauces.join(" + ")}${toppingLabel ? ` · ${toppingLabel}` : ""}${extraLabel ? ` · ${extraLabel}` : ""}`
+        ? `${choice.product.name} · ${choice.sauces.join(" + ")}${toppingLabel ? ` · ${toppingLabel}` : ""}${extraLabel ? ` · ${extraLabel}` : ""}${drinkLabel ? ` · ${drinkLabel}` : ""}`
         : choice.product.name,
       description: `${choice.product.description}${customization ? ` ${customization}` : ""}`,
     });
@@ -184,7 +190,7 @@ export function ProductCard({
               </>
             ) : (
               <>
-                {menuProduct && (
+                {menuProduct && step === 2 && (
                   <button
                     type="button"
                     className="selection-back"
@@ -194,7 +200,16 @@ export function ProductCard({
                   </button>
                 )}
 
-                {isPancake && step === 1 ? (
+                {step === 3 ? (
+                  <div className="choice-section">
+                    <h4>Escolhe a bebida</h4>
+                    <p>Seleciona a bebida incluída no menu. As opções específicas de bebidas ainda não estão configuradas na ementa online.</p>
+                    <div className="topping-options">
+                      <button type="button" className={choice.drink ? "topping-option is-selected" : "topping-option"} onClick={() => setChoice({ ...choice, drink: "Bebida 33 cl à escolha" })}>Bebida 33 cl à escolha</button>
+                    </div>
+                    <button type="button" className="selection-back" onClick={() => setStep(2)}><ChevronLeft size={15} /> Voltar aos molhos</button>
+                  </div>
+                ) : isPancake && step === 1 ? (
                   <div className="choice-section">
                     <h4>Escolhe o tamanho</h4>
                     <div className="choice-grid">
@@ -333,10 +348,10 @@ export function ProductCard({
 
                 <Button
                   tone="gold"
-                  disabled={isPancake ? (choice.toppings.length !== 2 || choice.sauces.length !== 1) : choice.sauces.length === 0}
+                  disabled={isPancake ? (choice.toppings.length !== 2 || choice.sauces.length !== 1) : step === 3 ? !choice.drink : choice.sauces.length === 0}
                   onClick={confirmChoice}
                 >
-                  <Plus size={16} /> Adicionar ao carrinho
+                  <Plus size={16} /> {step === 2 && choice.product.category === "Burger" && choice.product.name.endsWith(" · Menu") ? "Continuar para bebidas" : "Adicionar ao carrinho"}
                 </Button>
               </>
             )}
