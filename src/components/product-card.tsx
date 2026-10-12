@@ -45,12 +45,10 @@ export function ProductCard({
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [animationItem, setAnimationItem] = useState("");
   const [animationKey, setAnimationKey] = useState(0);
-  const [animationRemoving, setAnimationRemoving] = useState(false);
 
   const animateIngredient = (item: string, removing = false) => {
     // Removing a sauce should simply remove the visual; never replay a falling animation.
     setAnimationItem(removing ? "" : item);
-    setAnimationRemoving(false);
     setAnimationKey((key) => key + 1);
   };
 
