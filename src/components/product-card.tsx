@@ -45,9 +45,11 @@ export function ProductCard({
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [animationItem, setAnimationItem] = useState("");
   const [animationKey, setAnimationKey] = useState(0);
+  const [animationRemoving, setAnimationRemoving] = useState(false);
 
-  const animateIngredient = (item: string) => {
+  const animateIngredient = (item: string, removing = false) => {
     setAnimationItem(item);
+    setAnimationRemoving(removing);
     setAnimationKey((key) => key + 1);
   };
 
@@ -171,7 +173,7 @@ export function ProductCard({
                 <div className="food-animation__base" />
                 <div className="food-animation__filling" />
                 <div className="food-animation__top" />
-                {animationItem && <span key={animationKey} className={`food-animation__ingredient ${/molho|ketchup|maionese|mostarda|nutella|chocolate|caramelo|coulis|pistache/i.test(animationItem) ? "is-sauce" : "is-solid"}`}>{animationItem}</span>}
+                {animationItem && <span key={animationKey} className={`food-animation__ingredient ${/molho|ketchup|maionese|mostarda|nutella|chocolate|caramelo|coulis|pistache/i.test(animationItem) ? "is-sauce" : "is-solid"} ${animationRemoving ? "is-removing" : ""}`}>{animationItem}</span>}
               </div>
             )}
 
@@ -301,7 +303,7 @@ export function ProductCard({
                                       ? [...choice.toppings, topping]
                                       : choice.toppings,
                                 });
-                                animateIngredient(topping);
+                                animateIngredient(topping, selected);
                               }}
                             >
                               {topping}
@@ -328,7 +330,7 @@ export function ProductCard({
                                     ? choice.extras.filter((item) => item !== extra)
                                     : [...choice.extras, extra],
                                 });
-                                animateIngredient(extra);
+                                animateIngredient(extra, selected);
                               }}
                             >
                               {extra}
@@ -356,7 +358,7 @@ export function ProductCard({
                                   ? choice.sauces.filter((item) => item !== sauce)
                                   : [...choice.sauces, sauce],
                               });
-                              animateIngredient(sauce);
+                              animateIngredient(sauce, choice.sauces.includes(sauce));
                             }}
                           >
                             {sauce}
