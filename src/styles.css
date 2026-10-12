@@ -243,3 +243,7 @@ iframe[title*="Lovable" i] { display:none !important; visibility:hidden !importa
 @keyframes ingredient-sauce{0%{opacity:0;transform:translate(-50%,-30px) scale(.7);border-radius:50%}45%{opacity:1}75%{transform:translate(-50%,57px) scale(1.08,1.3);border-radius:8px}100%{opacity:1;transform:translate(-50%,57px) scale(1.15,.65);border-radius:8px}}
 @keyframes burger-open-close{0%,100%{translate:0 0}25%{translate:0 -12px;rotate:-2deg}65%{translate:0 -12px;rotate:1deg}85%{translate:0 2px}}
 @media(prefers-reduced-motion:reduce){.food-animation__ingredient,.food-animation--burger:has(.food-animation__ingredient) .food-animation__top{animation:none}}
+
+/* Reverse motion when removing a selected ingredient */
+.food-animation__ingredient.is-removing{animation:ingredient-remove .42s ease-in both}
+@keyframes ingredient-remove{0%{opacity:1;transform:translate(-50%,57px) scale(1)}100%{opacity:0;transform:translate(-50%,-24px) scale(.72)}}
