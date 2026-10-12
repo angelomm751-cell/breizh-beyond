@@ -1,13 +1,22 @@
 import { useMenu } from "@/hooks/use-menu";
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
-import { ArrowDown, ArrowRight } from "lucide-react";
+import { useState } from "react";
+import { ArrowDown, ArrowLeft, ArrowRight } from "lucide-react";
+import { type Category } from "@/lib/menu";
 import heroImage from "@/assets/breizh-hero.jpg";
 import craftImage from "@/assets/breizh-craft.jpg";
 import menuImage from "@/assets/breizh-menu.jpg";
 import maisonImage from "@/assets/breizh-maison.jpg";
 import { Reveal } from "@/components/reveal";
 import { ProductCard } from "@/components/product-card";
+
+const categoryOrder: Category[] = ["Burger", "Galettes", "Mini Pancakes"];
+const categoryLabel: Record<Category, string> = {
+  Burger: "Hambúrgueres",
+  Galettes: "Galettes",
+  "Mini Pancakes": "Mini pancakes",
+};
 
 export const Route = createFileRoute("/")({
   head: () => ({ meta: [
@@ -23,14 +32,13 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const products = useMenu();
-  const pairedProducts = products
-    .filter((product) => !product.name.endsWith(" · Menu"))
-    .map((product) => ({
-      product,
-      menuProduct: products.find((candidate) =>
-        candidate.name === product.name.replace(/ · Só$/i, " · Menu")
-      ),
-    }));
+  const [activeCategory, setActiveCategory] = useState<Category | null>(null);
+  const categories = categoryOrder.filter((category) => products.some((product) => product.category === category));
+  const categoryProducts = activeCategory ? products.filter((product) => product.category === activeCategory) : [];
+  const pairs = categoryProducts.filter((product) => !product.name.endsWith(" · Menu")).map((product) => ({
+    product,
+    menuProduct: categoryProducts.find((candidate) => candidate.name === product.name.replace(/ · Só$/i, " · Menu")),
+  }));
 
   return (
     <>
@@ -68,7 +76,22 @@ function Index() {
 
       <section className="menu-preview">
         <Reveal className="section-heading"><span className="eyebrow">02 · La carte</span><h2>A ementa completa,<br /><em>à votre manière.</em></h2><p>Escolhe o produto e usa o <strong>+</strong> para escolher Só ou Menu e personalizar o teu pedido.</p></Reveal>
-        <div className="product-grid">{pairedProducts.map(({ product, menuProduct }, index) => <ProductCard product={product} menuProduct={menuProduct} index={index} key={product.id} />)}</div>
+        {!activeCategory ? (
+          <div className="category-grid">
+            {categories.map((category, index) => {
+              const representative = products.find((product) => product.category === category)!;
+              return <button type="button" className="category-card" key={category} onClick={() => setActiveCategory(category)} style={{ "--delay": `${index * 80}ms` } as React.CSSProperties}>
+                <span className="category-card__image"><img src={representative.image} alt="" loading="lazy" /><span className="category-card__number">{String(index + 1).padStart(2, "0")}</span></span>
+                <span className="category-card__copy"><strong>{categoryLabel[category]}</strong><span>Ver opções <ArrowRight size={15} /></span></span>
+              </button>;
+            })}
+          </div>
+        ) : (
+          <>
+            <button type="button" className="category-back" onClick={() => setActiveCategory(null)}><ArrowLeft size={15} /> Voltar às categorias</button>
+            <div className="product-grid product-grid--menu">{pairs.map(({ product, menuProduct }, index) => <ProductCard key={product.id} product={product} menuProduct={menuProduct} index={index} />)}</div>
+          </>
+        )}
         <Reveal className="section-heading"><Link to="/commander" className="text-link">Encomendar e ver o carrinho <ArrowRight size={16} /></Link></Reveal>
       </section>
 
