@@ -205,7 +205,7 @@ export function ProductCard({
                     <div className="food-animation__top" />
                   </>
                 )}
-                {animationItem && <span key={animationKey} aria-label={animationItem} className={`food-animation__ingredient ${isSauceAnimation ? "is-sauce" : "is-solid"}`} style={isSauceAnimation ? ({ "--sauce-color": sauceColor } as React.CSSProperties) : undefined}>{isSauceAnimation ? <><i className="food-animation__sauce-stream" /><i className="food-animation__sauce-drop" /><i className="food-animation__sauce-splash" /></> : <span className="food-animation__ingredient-label">{animationItem}</span>}</span>}
+                {animationItem && product.category !== "Burger" && <span key={animationKey} aria-label={animationItem} className={`food-animation__ingredient ${isSauceAnimation ? "is-sauce" : "is-solid"}`} style={isSauceAnimation ? ({ "--sauce-color": sauceColor } as React.CSSProperties) : undefined}>{isSauceAnimation ? <><i className="food-animation__sauce-stream" /><i className="food-animation__sauce-drop" /><i className="food-animation__sauce-splash" /></> : <span className="food-animation__ingredient-label">{animationItem}</span>}</span>}
               </div>
             )}
 
