@@ -52,7 +52,11 @@ export function ProductCard({
     setAnimationKey((key) => key + 1);
   };
 
-  const isSauceAnimation = /molho|ketchup|maionese|mostarda|nutella|chocolate|caramelo|coulis|pistache|chantilly/i.test(animationItem);
+  // Burger choices in this step are exclusively sauces: never show a falling text label over a burger.
+  const isSauceAnimation = product.category === "Burger"
+    ? Boolean(animationItem)
+    : [...pancakeSauces, ...burgerSauces, ...galetteSauces, ...pancakeExtras].includes(animationItem) ||
+      /nutella|chocolate|caramelo|coulis|pistache|chantilly/i.test(animationItem);
   const sauceColor = /ketchup|coulis|frutos vermelhos/i.test(animationItem) ? "#c92532"
     : /maionese|chocolate branco|chantilly/i.test(animationItem) ? "#f5e7c5"
     : /mostarda/i.test(animationItem) ? "#e7b51c"
