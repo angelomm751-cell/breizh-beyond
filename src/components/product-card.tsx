@@ -53,6 +53,16 @@ export function ProductCard({
     setAnimationKey((key) => key + 1);
   };
 
+  const isSauceAnimation = /molho|ketchup|maionese|mostarda|nutella|chocolate|caramelo|coulis|pistache|chantilly/i.test(animationItem);
+  const sauceColor = /ketchup|coulis|frutos vermelhos/i.test(animationItem) ? "#c92532"
+    : /maionese|chocolate branco|chantilly/i.test(animationItem) ? "#f5e7c5"
+    : /mostarda/i.test(animationItem) ? "#e7b51c"
+    : /molho burger/i.test(animationItem) ? "#e58a45"
+    : /pistache/i.test(animationItem) ? "#8eaa55"
+    : /caramelo/i.test(animationItem) ? "#bd762e"
+    : /nutella|chocolate negro|pepitas de chocolate|lotus/i.test(animationItem) ? "#4b241c"
+    : "#b84c32";
+
   const isPancake = product.category === "Mini Pancakes";
   const needsToppings = isPancake;
 
@@ -173,7 +183,7 @@ export function ProductCard({
                 <div className="food-animation__base" />
                 <div className="food-animation__filling" />
                 <div className="food-animation__top" />
-                {animationItem && <span key={animationKey} className={`food-animation__ingredient ${/molho|ketchup|maionese|mostarda|nutella|chocolate|caramelo|coulis|pistache/i.test(animationItem) ? "is-sauce" : "is-solid"} ${animationRemoving ? "is-removing" : ""}`}>{animationItem}</span>}
+                {animationItem && <span key={animationKey} aria-label={animationItem} className={`food-animation__ingredient ${isSauceAnimation ? "is-sauce" : "is-solid"} ${animationRemoving ? "is-removing" : ""}`} style={isSauceAnimation ? ({ "--sauce-color": sauceColor } as React.CSSProperties) : undefined}>{isSauceAnimation ? <><i className="food-animation__sauce-stream" /><i className="food-animation__sauce-drop" /><i className="food-animation__sauce-splash" /></> : <span className="food-animation__ingredient-label">{animationItem}</span>}</span>}
               </div>
             )}
 
